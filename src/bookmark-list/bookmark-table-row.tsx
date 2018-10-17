@@ -5,11 +5,11 @@ import TableRow from '@material-ui/core/TableRow';
 
 import { IBookmark } from './bookmark.type';
 
-interface IBookmarkTableRowProps {
+export interface IBookmarkTableRowProps {
   bookmark: IBookmark;
 }
 
-const BookmarkTableRow = (props: IBookmarkTableRowProps) => (
+export const BookmarkTableRow = (props: IBookmarkTableRowProps) => (
   <TableRow>
     <TableCell>{props.bookmark.title}</TableCell>
     <TableCell>{props.bookmark.url}</TableCell>
@@ -17,5 +17,3 @@ const BookmarkTableRow = (props: IBookmarkTableRowProps) => (
     <TableCell>{props.bookmark.addedDate.toString()}</TableCell>
   </TableRow>
 );
-
-export default BookmarkTableRow;

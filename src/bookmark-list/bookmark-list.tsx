@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import BookmarkTable from './bookmark-table';
+import { BookmarkTable } from './bookmark-table';
 
 import { columnList } from './columnList';
 import { TBookmarkList } from './bookmark.type';

@@ -1,4 +1,4 @@
-enum EColumns {
+export enum EColumns {
   ADDED_DATE = 'added',
   AUTHOR_NAME = 'author',
   TITLE = 'title',

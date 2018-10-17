@@ -1,20 +1,21 @@
 import * as React from 'react';
 
 import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 
 import { ColumnList } from './columnList';
 
-interface IBookmarkTableHeaderProps {
+export interface IBookmarkTableHeaderProps {
   columnList: ColumnList;
 }
 
-const BookmarkTableHeader = (props: IBookmarkTableHeaderProps) => (
+export const BookmarkTableHeader = (props: IBookmarkTableHeaderProps) => (
   <TableHead>
-    {props.columnList.map(column => (
-      <TableCell>{column}</TableCell>
-    ))}
+    <TableRow>
+      {props.columnList.map(column => (
+        <TableCell key={column}>{column}</TableCell>
+      ))}
+    </TableRow>
   </TableHead>
 );
-
-export default BookmarkTableHeader;

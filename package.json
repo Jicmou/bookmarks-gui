@@ -13,7 +13,7 @@
     "eject": "react-scripts-ts eject",
     "lint": "rm -rf build/dist && tsc && tslint --project ./tsconfig.json",
     "start": "react-scripts-ts start",
-    "test": "react-scripts-ts test --env=jsdom --coverage",
+    "test": "react-scripts-ts test --env=jsdom",
     "test:ci": "CI=true npm test"
   },
   "devDependencies": {
