@@ -4,10 +4,10 @@ import { BookmarkTable } from './bookmark-table';
 
 import { columnList } from './columnList';
 import { TBookmarkList } from './bookmark.type';
-import { MOCK_BOOKMARK } from './bookmark.mock';
+import { MOCK_BOOKMARK_LIST } from './bookmark.mock';
 
 export class BookmarkList extends React.Component {
-  private bookmarkList: TBookmarkList = [MOCK_BOOKMARK];
+  private bookmarkList: TBookmarkList = MOCK_BOOKMARK_LIST;
 
   private columnList = columnList;
 

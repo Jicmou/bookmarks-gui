@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './bookmark-table.css';
 
 import Table from '@material-ui/core/Table';
 
@@ -14,7 +15,7 @@ export interface IBookmarkTableProps {
 }
 
 export const BookmarkTable = (props: IBookmarkTableProps) => (
-  <Table>
+  <Table className="bookmark-table">
     <BookmarkTableHeader columnList={props.columnList} />
     <BookmarkTableBody bookmarkList={props.bookmarkList} />
   </Table>
