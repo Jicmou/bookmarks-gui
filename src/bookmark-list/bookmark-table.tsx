@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './bookmark-table.css';
 
+import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 
 import { BookmarkTableHeader } from './bookmark-table-header';
@@ -15,8 +16,10 @@ export interface IBookmarkTableProps {
 }
 
 export const BookmarkTable = (props: IBookmarkTableProps) => (
-  <Table className="bookmark-table">
-    <BookmarkTableHeader columnList={props.columnList} />
-    <BookmarkTableBody bookmarkList={props.bookmarkList} />
-  </Table>
+  <Paper className="bookmark-table-container" elevation={1}>
+    <Table className="bookmark-table">
+      <BookmarkTableHeader columnList={props.columnList} />
+      <BookmarkTableBody bookmarkList={props.bookmarkList} />
+    </Table>
+  </Paper>
 );
