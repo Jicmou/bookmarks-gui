@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { BookmarkTable } from './bookmark-list/bookmark-table';
+import { BookmarkTable } from './bookmark-table/bookmark-table';
 
-import { columnList, ColumnList } from './bookmark-list/columnList';
-import { TBookmarkList } from './bookmark-list/bookmark.type';
-import { MOCK_BOOKMARK_LIST } from './bookmark-list/bookmark.mock';
+import { columnList, ColumnList } from './bookmark-table/columnList';
+import { TBookmarkList } from './bookmark-table/bookmark.type';
+import { MOCK_BOOKMARK_LIST } from './bookmark-table/bookmark.mock';
 
 interface IMainState {
   bookmarkList: TBookmarkList;
