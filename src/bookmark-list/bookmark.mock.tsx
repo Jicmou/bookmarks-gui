@@ -28,10 +28,6 @@ export const MOCK_BOOKMARK_LIST: types.TBookmarkList = [
   },
   {
     ...MOCK_BOOKMARK,
-    id: 5,
-  },
-  {
-    ...MOCK_BOOKMARK,
     id: 6,
   },
   {

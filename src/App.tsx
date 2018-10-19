@@ -3,7 +3,7 @@ import './App.css';
 
 import logo from './logo.svg';
 
-import { BookmarkList } from './bookmark-list/bookmark-list';
+import { Main } from './main';
 
 class App extends React.Component {
   public render() {
@@ -14,7 +14,7 @@ class App extends React.Component {
           <h1 className="App-title">Bookmark Manager</h1>
         </header>
         <div className="main">
-          <BookmarkList />
+          <Main />
         </div>
       </div>
     );

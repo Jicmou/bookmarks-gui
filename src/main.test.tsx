@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { BookmarkList } from './bookmark-list';
+import { Main } from './main';
 
 const renderBookmarkList = (container: HTMLElement) => {
-  ReactDOM.render(<BookmarkList />, container);
+  ReactDOM.render(<Main />, container);
   ReactDOM.unmountComponentAtNode(container);
 };
 
