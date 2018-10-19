@@ -4,7 +4,7 @@ import { BookmarkTable } from './bookmark-table/bookmark-table';
 
 import { columnList, ColumnList } from './bookmark-table/columnList';
 import { TBookmarkList } from './bookmark-table/bookmark.type';
-import { MOCK_BOOKMARK_LIST } from './bookmark-table/bookmark.mock';
+import { getBookmarkList } from './bookmark.service';
 
 interface IMainState {
   bookmarkList: TBookmarkList;
@@ -15,9 +15,18 @@ export class Main extends React.Component<{}, IMainState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      bookmarkList: MOCK_BOOKMARK_LIST,
+      bookmarkList: [],
       columnList,
     };
+  }
+
+  public componentDidMount() {
+    return getBookmarkList().then(bookmarkList => {
+      this.setState({
+        bookmarkList,
+        columnList,
+      });
+    });
   }
 
   public render() {
