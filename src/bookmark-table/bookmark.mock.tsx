@@ -1,11 +1,15 @@
 import * as types from './bookmark.type';
 
 export const MOCK_BOOKMARK: types.IBookmark = {
-  addedDate: new Date(2018, 11, 16),
   authorName: 'foo',
+  creationDate: new Date(2018, 11, 16),
+  duration: 60,
+  height: 600,
   id: 1,
   title: 'bar',
+  type: types.EType.VIDEO,
   url: 'http://baz.qux',
+  width: 800,
 };
 
 export const MOCK_BOOKMARK_LIST: types.TBookmarkList = [
