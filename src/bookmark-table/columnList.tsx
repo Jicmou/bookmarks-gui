@@ -1,5 +1,5 @@
 export enum EColumns {
-  ADDED_DATE = 'added',
+  CREATION_DATE = 'creation',
   AUTHOR_NAME = 'author',
   TITLE = 'title',
   URL = 'url',
@@ -11,5 +11,5 @@ export const columnList: ColumnList = [
   EColumns.TITLE,
   EColumns.URL,
   EColumns.AUTHOR_NAME,
-  EColumns.ADDED_DATE,
+  EColumns.CREATION_DATE,
 ];

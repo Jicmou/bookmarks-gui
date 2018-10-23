@@ -14,6 +14,6 @@ export const BookmarkTableRow = (props: IBookmarkTableRowProps) => (
     <TableCell>{props.bookmark.title}</TableCell>
     <TableCell>{props.bookmark.url}</TableCell>
     <TableCell>{props.bookmark.authorName}</TableCell>
-    <TableCell>{props.bookmark.addedDate.toString()}</TableCell>
+    <TableCell>{props.bookmark.creationDate.toString()}</TableCell>
   </TableRow>
 );

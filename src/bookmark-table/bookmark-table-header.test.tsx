@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { ColumnList, EColumns } from './columnList';
+import { MOCK_COLUMN_LIST } from '../testing/column.mock';
 
 import {
   BookmarkTableHeader,
@@ -19,7 +19,6 @@ const renderBookmarkList = (container: HTMLElement) => (
 };
 
 it('renders without crashing', () => {
-  const MOCK_COLUMN_LIST: ColumnList = [EColumns.TITLE, EColumns.URL];
   renderBookmarkList(document.createElement('table'))({
     columnList: MOCK_COLUMN_LIST,
   });

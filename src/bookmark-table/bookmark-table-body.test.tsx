@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { MOCK_BOOKMARK_LIST } from './bookmark.mock';
+import { MOCK_BOOKMARK_LIST } from '../testing/bookmark.mock';
 
 import {
   BookmarkTableBody,
