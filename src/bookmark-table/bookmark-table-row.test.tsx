@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { MOCK_BOOKMARK } from './bookmark.mock';
+import { MOCK_BOOKMARK } from '../testing/bookmark.mock';
 
 import { BookmarkTableRow, IBookmarkTableRowProps } from './bookmark-table-row';
 

@@ -30,3 +30,7 @@ export interface IBookmarkJSON {
 }
 
 export type TBookmarkJSONList = IBookmarkJSON[];
+
+export interface IGetBookmarkListResponse {
+  bookmarkList: TBookmarkJSONList;
+}
