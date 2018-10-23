@@ -49,3 +49,16 @@ export const createBookmark = (fetch: Fetch) => (apiUrl: string) => (
     .then((json: types.ICreateBookmarkResponse) =>
       fromJSONToBookmark(json.bookmark),
     );
+
+export const deleteBookmark = (fetch: Fetch) => (apiUrl: string) => (
+  id: number,
+) =>
+  fetch(`${apiUrl}/v1/bookmarks/${id.toString()}`, {
+    method: EMethod.DELETE,
+    redirect: ERedirect.FOLLOW,
+  }).then(response => {
+    if (!response.ok) {
+      return Promise.reject(response);
+    }
+    return Promise.resolve(response);
+  });

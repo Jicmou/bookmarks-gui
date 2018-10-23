@@ -59,4 +59,22 @@ describe('Bookmark service: ', () => {
           ));
     });
   });
+  describe('deleteBookmark() ', () => {
+    describe('GIVEN an invalid id: ', () => {
+      it('SHOULD eventually reject the promise: ', done => {
+        testedModule
+          .deleteBookmark(FETCH_STUB_404)('foo')(1234)
+          .catch(() => done());
+      });
+    });
+    describe('GIVEN a valid id: ', () => {
+      const mockFetch = injectJsonSuccessResponseToFetch(
+        MOCK_CREATE_BOOKMARK_RESPONSE_BODY,
+      );
+      it('SHOULD eventually resolve to the promise: ', done =>
+        testedModule
+          .deleteBookmark(mockFetch)('foo')(5678)
+          .then(() => done()));
+    });
+  });
 });
