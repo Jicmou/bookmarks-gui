@@ -21,8 +21,31 @@ export const getBookmarkList = (fetch: Fetch) => (apiUrl: string) =>
     redirect: ERedirect.FOLLOW,
   })
     .then(response => response.json())
-    .then(json =>
-      (json as types.IGetBookmarkListResponse).bookmarkList.map(
-        fromJSONToBookmark,
-      ),
+    .then((json: types.IGetBookmarkListResponse) =>
+      json.bookmarkList.map(fromJSONToBookmark),
+    )
+    .catch((error: any) => {
+      // tslint:disable-next-line:no-console
+      console.error('Error while fetching bookmark List: ', error);
+      return [] as types.TBookmarkList;
+    });
+
+export const createBookmark = (fetch: Fetch) => (apiUrl: string) => (
+  link: string,
+) =>
+  fetch(`${apiUrl}/v1/bookmarks`, {
+    body: JSON.stringify({
+      url: link,
+    }),
+    method: EMethod.POST,
+    redirect: ERedirect.FOLLOW,
+  })
+    .then(response => {
+      if (!response.ok) {
+        return Promise.reject(response);
+      }
+      return response.json();
+    })
+    .then((json: types.ICreateBookmarkResponse) =>
+      fromJSONToBookmark(json.bookmark),
     );

@@ -1,10 +1,16 @@
-import { MOCK_BOOKMARK_JSON } from './testing/bookmark.mock';
-import { injectJsonSuccessResponseToFetch } from './testing/fetch.stub';
+import {
+  MOCK_BOOKMARK_JSON,
+  MOCK_CREATE_BOOKMARK_RESPONSE_BODY,
+} from './testing/bookmark.mock';
+import {
+  injectJsonSuccessResponseToFetch,
+  FETCH_STUB_404,
+} from './testing/fetch.stub';
 
 import * as testedModule from './bookmark.service';
 
 describe('Bookmark service: ', () => {
-  describe('fromJSONToBookmark', () => {
+  describe('fromJSONToBookmark() ', () => {
     describe('GIVEN a JSON Bookmark, ', () => {
       it('SHOULD return a bookmark', () => {
         expect(testedModule.fromJSONToBookmark(MOCK_BOOKMARK_JSON)).toEqual({
@@ -23,10 +29,33 @@ describe('Bookmark service: ', () => {
       it('SHOULD eventually get a mocked bookmark list: ', () =>
         testedModule
           .getBookmarkList(mockFetch)('foo')
-          .then(expectedBookmarkList =>
-            expect(expectedBookmarkList).toEqual([
+          .then(bookmarkList =>
+            expect(bookmarkList).toEqual([
               testedModule.fromJSONToBookmark(MOCK_BOOKMARK_JSON),
             ]),
+          ));
+    });
+  });
+
+  describe('createBookmark() ', () => {
+    describe('GIVEN an invalid link: ', () => {
+      it('SHOULD eventually reject the promise: ', done => {
+        testedModule
+          .createBookmark(FETCH_STUB_404)('foo')('bar')
+          .catch(() => done());
+      });
+    });
+    describe('GIVEN a valid link: ', () => {
+      const mockFetch = injectJsonSuccessResponseToFetch(
+        MOCK_CREATE_BOOKMARK_RESPONSE_BODY,
+      );
+      it('SHOULD eventually resolve to the newly created bookmark: ', () =>
+        testedModule
+          .createBookmark(mockFetch)('foo')('bar')
+          .then(bookmark =>
+            expect(bookmark).toEqual(
+              testedModule.fromJSONToBookmark(MOCK_BOOKMARK_JSON),
+            ),
           ));
     });
   });

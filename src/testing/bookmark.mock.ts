@@ -107,3 +107,7 @@ export const MOCK_BOOKMARK_JSON_LIST: types.TBookmarkJSONList = [
 export const MOCK_GET_BOOKMARK_LIST_RESPONSE_BODY: types.IGetBookmarkListResponse = {
   bookmarkList: MOCK_BOOKMARK_JSON_LIST,
 };
+
+export const MOCK_CREATE_BOOKMARK_RESPONSE_BODY: types.ICreateBookmarkResponse = {
+  bookmark: MOCK_BOOKMARK_JSON,
+};

@@ -23,7 +23,7 @@ class App extends React.Component<IAppProps, IAppState> {
   constructor(props: IAppProps) {
     super(props);
     this.state = {
-      apiUrl: 'http://localhost:8000/',
+      apiUrl: 'http://localhost:8000',
       bookmarkList: [],
       columnList,
     };
