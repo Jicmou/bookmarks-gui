@@ -1,6 +1,11 @@
 import * as types from './bookmark-table/bookmark.type';
 import { Fetch, ERedirect, EMethod } from './types/fetch.type';
 
+export interface IServerErrorMessage {
+  code: number;
+  message: string;
+}
+
 export const fromJSONToBookmark = (
   bookmarkJSON: types.IBookmarkJSON,
 ): types.IBookmark => ({
@@ -21,14 +26,10 @@ export const getBookmarkList = (fetch: Fetch) => (apiUrl: string) =>
     redirect: ERedirect.FOLLOW,
   })
     .then(response => response.json())
-    .then((json: types.IGetBookmarkListResponse) =>
-      json.bookmarkList.map(fromJSONToBookmark),
+    .then((body: types.IGetBookmarkListResponse) =>
+      body.bookmarkList.map(fromJSONToBookmark),
     )
-    .catch((error: any) => {
-      // tslint:disable-next-line:no-console
-      console.error('Error while fetching bookmark List: ', error);
-      return [] as types.TBookmarkList;
-    });
+    .catch(() => [] as types.TBookmarkList);
 
 export const createBookmark = (fetch: Fetch) => (apiUrl: string) => (
   link: string,
@@ -40,15 +41,14 @@ export const createBookmark = (fetch: Fetch) => (apiUrl: string) => (
     method: EMethod.POST,
     redirect: ERedirect.FOLLOW,
   })
-    .then(response => {
-      if (!response.ok) {
-        return Promise.reject(response);
-      }
-      return response.json();
-    })
-    .then((json: types.ICreateBookmarkResponse) =>
-      fromJSONToBookmark(json.bookmark),
-    );
+    .then(response => response.json())
+    .then(
+      body =>
+        !body || body.code
+          ? Promise.reject(body as IServerErrorMessage)
+          : Promise.resolve((body as types.ICreateBookmarkResponse).bookmark),
+    )
+    .then(fromJSONToBookmark);
 
 export const deleteBookmark = (fetch: Fetch) => (apiUrl: string) => (
   id: number,
