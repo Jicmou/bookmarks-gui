@@ -3,33 +3,36 @@ import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-import './bookmark-form.css';
+import { IPreventEvent, IInputEvent } from '../App';
 
-// export type TOnChange = (event: React.ChangeEvent<Element>) => void;
+interface IBookmarkFormProps {
+  inputValue: string;
+  onInputChange: (event: IInputEvent) => void;
+  onFormSubmit: (event: IPreventEvent) => void;
+}
 
-// interface IBookmarkFormProps {
-//   onChange: TOnChange;
-// }
-
-export class BookmarkForm extends React.Component {
+export class BookmarkForm extends React.Component<IBookmarkFormProps> {
   public render() {
     return (
-      <div className="bookmark-form">
+      <form className="bookmark-form" onSubmit={this.props.onFormSubmit}>
         <TextField
+          className="bookmark-form-input"
           id="outlined-name"
           label="Link"
-          className="bookmark-form-input"
           margin="normal"
+          onChange={this.props.onInputChange}
+          value={this.props.inputValue}
           variant="outlined"
         />
         <Button
-          variant="contained"
-          color="primary"
           className="bookmark-form-button"
+          color="primary"
+          type="submit"
+          variant="contained"
         >
           Add
         </Button>
-      </div>
+      </form>
     );
   }
 }

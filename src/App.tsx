@@ -1,13 +1,19 @@
 import * as React from 'react';
 import './App.css';
 
+import Modal from '@material-ui/core/Modal';
+// import Popover from '@material-ui/core/Popover';
 import logo from './logo.svg';
 
 import { Fetch } from './types/fetch.type';
 import { Main } from './main';
 import { TBookmarkList } from './bookmark-table/bookmark.type';
 import { columnList, ColumnList } from './bookmark-table/columnList';
-import { getBookmarkList } from './bookmark.service';
+import {
+  getBookmarkList,
+  createBookmark,
+  IServerErrorMessage,
+} from './bookmark.service';
 
 export interface IAppProps {
   fetch: Fetch;
@@ -17,7 +23,34 @@ export interface IAppState {
   apiUrl: string;
   bookmarkList: TBookmarkList;
   columnList: ColumnList;
+  inputValue: string;
+  modalMessage: string;
+  modalOpen: boolean;
+  modalAnchor: HTMLElement | null | undefined;
 }
+
+export interface IInputEvent {
+  target: { value: string };
+}
+
+export interface IPreventEvent {
+  preventDefault: () => void;
+}
+
+// const styles = (theme: any) => ({
+//   paper: {
+//     backgroundColor: theme.palette.background.paper,
+//     boxShadow: theme.shadows[5],
+//     padding: theme.spacing.unit * 4,
+//     position: 'absolute',
+//     width: theme.spacing.unit * 50,
+//   },
+// });
+
+// type SetInputState = (partialState: { inputValue: string }) => void;
+// type SetModalState = (
+//   partialState: { modalOpen: boolean; modalMessage: string },
+// ) => void;
 
 class App extends React.Component<IAppProps, IAppState> {
   constructor(props: IAppProps) {
@@ -26,6 +59,10 @@ class App extends React.Component<IAppProps, IAppState> {
       apiUrl: 'http://localhost:8000',
       bookmarkList: [],
       columnList,
+      inputValue: '',
+      modalAnchor: undefined,
+      modalMessage: '',
+      modalOpen: false,
     };
   }
   public componentDidMount() {
@@ -43,19 +80,73 @@ class App extends React.Component<IAppProps, IAppState> {
           <Main
             bookmarkList={this.state.bookmarkList}
             columnList={this.state.columnList}
+            inputValue={this.state.inputValue}
+            onFormSubmit={this.handleFormSubmit(this.state)}
+            onInputChange={this.handleInputChange()}
           />
         </div>
+        <Modal
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          className="modal"
+          open={this.state.modalOpen}
+          onClose={this.handleModalClose()}
+        >
+          <div className="modal-content" id="simple-modal-descriptio">
+            {this.state.modalMessage}
+          </div>
+        </Modal>
       </div>
     );
+  }
+
+  private handleFormSubmit(state: IAppState) {
+    return (event: Event) => {
+      event.preventDefault();
+      this.createBookmark(event)(state.inputValue);
+    };
+  }
+
+  private handleInputChange() {
+    return (event: IInputEvent) => {
+      this.setState({
+        inputValue: event.target.value,
+      });
+    };
+  }
+
+  private handleModalClose() {
+    return () => {
+      this.setState({
+        modalMessage: '',
+        modalOpen: false,
+      });
+    };
+  }
+
+  private createBookmark(event: Event) {
+    return (link: string) =>
+      createBookmark(this.props.fetch)(this.state.apiUrl)(link)
+        .then(bookmark => {
+          this.setState({
+            bookmarkList: [...this.state.bookmarkList, bookmark],
+            inputValue: '',
+            modalAnchor: event.currentTarget as HTMLElement,
+          });
+        })
+        .catch((errorMessage: IServerErrorMessage) => {
+          this.setState({
+            modalMessage: errorMessage.message,
+            modalOpen: true,
+          });
+        });
   }
 
   private retrieveBookmarkList() {
     return getBookmarkList(this.props.fetch)(this.state.apiUrl).then(
       bookmarkList => {
         this.setState({
-          apiUrl: this.state.apiUrl,
           bookmarkList,
-          columnList,
         });
       },
     );

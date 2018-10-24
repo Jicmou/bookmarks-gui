@@ -30,7 +30,7 @@
   line-height: 1.7em;
 }
 
-.main {
+.main-body {
   position: relative;
   height: calc(100vh - 40px);
   width: 100%;
@@ -39,4 +39,37 @@
   align-content: center;
   justify-content: flex-start;
 
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  position: relative;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  min-width: 100px;
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+form.bookmark-form {
+  position: relative;
+  width: 100%;
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div.bookmark-form-input {
+  margin-right: 40px;
+  min-width: 600px
 }
