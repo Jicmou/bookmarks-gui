@@ -14,22 +14,20 @@ interface IMainProps {
   inputValue: string;
   onInputChange: (event: IInputEvent) => void;
   onFormSubmit: (event: IPreventEvent) => void;
+  onDelete: (bookmarkId: number) => () => void;
 }
 
-export class Main extends React.Component<IMainProps> {
-  public render() {
-    return (
-      <div className="main-body">
-        <BookmarkForm
-          inputValue={this.props.inputValue}
-          onFormSubmit={this.props.onFormSubmit}
-          onInputChange={this.props.onInputChange}
-        />
-        <BookmarkTable
-          columnList={this.props.columnList}
-          bookmarkList={this.props.bookmarkList}
-        />
-      </div>
-    );
-  }
-}
+export const Main = (props: IMainProps) => (
+  <div className="main-body">
+    <BookmarkForm
+      inputValue={props.inputValue}
+      onFormSubmit={props.onFormSubmit}
+      onInputChange={props.onInputChange}
+    />
+    <BookmarkTable
+      columnList={props.columnList}
+      bookmarkList={props.bookmarkList}
+      onDelete={props.onDelete}
+    />
+  </div>
+);
