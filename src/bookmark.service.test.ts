@@ -92,7 +92,7 @@ describe('Bookmark service: ', () => {
     describe(`GIVEN a bookmark list,
       AND a bookmark id that is not on the list`, () => {
       const mockId = Number.MAX_SAFE_INTEGER;
-      const mockBookmarkList = [
+      const expectedMockId = [
         MOCK_BOOKMARK,
         {
           ...MOCK_BOOKMARK,
@@ -102,6 +102,9 @@ describe('Bookmark service: ', () => {
           ...MOCK_BOOKMARK,
           id: 3,
         },
+      ];
+      const mockBookmarkList = [
+        ...expectedMockId,
         {
           ...MOCK_BOOKMARK,
           id: mockId,
