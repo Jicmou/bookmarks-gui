@@ -113,10 +113,10 @@ describe('Bookmark service: ', () => {
       it('SHOULD return the same bookmark list', () => {
         expect(
           testedModule.removeBookmarkFromList(mockBookmarkList)(mockId).length,
-        ).toEqual(mockBookmarkList.length - 1);
+        ).toEqual(expectedMockId.length);
         expect(
           testedModule.removeBookmarkFromList(mockBookmarkList)(mockId),
-        ).toEqual(mockBookmarkList);
+        ).toEqual(expectedMockId);
       });
     });
   });
