@@ -1,5 +1,7 @@
 import {
+  MOCK_BOOKMARK,
   MOCK_BOOKMARK_JSON,
+  MOCK_BOOKMARK_LIST,
   MOCK_CREATE_BOOKMARK_RESPONSE_BODY,
 } from './testing/bookmark.mock';
 import {
@@ -75,6 +77,47 @@ describe('Bookmark service: ', () => {
         testedModule
           .deleteBookmark(mockFetch)('foo')(5678)
           .then(() => done()));
+    });
+  });
+
+  describe('removeBookmarkFromList() ', () => {
+    describe(`GIVEN a bookmark list,
+      AND a bookmark id that is not on the list`, () => {
+      it('SHOULD return the same bookmark list', () => {
+        expect(
+          testedModule.removeBookmarkFromList(MOCK_BOOKMARK_LIST)(999),
+        ).toEqual(MOCK_BOOKMARK_LIST);
+      });
+    });
+    describe(`GIVEN a bookmark list,
+      AND a bookmark id that is not on the list`, () => {
+      const mockId = Number.MAX_SAFE_INTEGER;
+      const expectedMockId = [
+        MOCK_BOOKMARK,
+        {
+          ...MOCK_BOOKMARK,
+          id: 2,
+        },
+        {
+          ...MOCK_BOOKMARK,
+          id: 3,
+        },
+      ];
+      const mockBookmarkList = [
+        ...expectedMockId,
+        {
+          ...MOCK_BOOKMARK,
+          id: mockId,
+        },
+      ];
+      it('SHOULD return the same bookmark list', () => {
+        expect(
+          testedModule.removeBookmarkFromList(mockBookmarkList)(mockId).length,
+        ).toEqual(expectedMockId.length);
+        expect(
+          testedModule.removeBookmarkFromList(mockBookmarkList)(mockId),
+        ).toEqual(expectedMockId);
+      });
     });
   });
 });

@@ -7,12 +7,17 @@ import { TBookmarkList } from './bookmark.type';
 
 export interface IBookmarkTableBodyProps {
   bookmarkList: TBookmarkList;
+  onDelete: (bookmarkId: number) => () => void;
 }
 
 export const BookmarkTableBody = (props: IBookmarkTableBodyProps) => (
   <TableBody>
     {props.bookmarkList.map(bookmark => (
-      <BookmarkTableRow bookmark={bookmark} key={bookmark.id} />
+      <BookmarkTableRow
+        bookmark={bookmark}
+        key={bookmark.id}
+        onDelete={props.onDelete}
+      />
     ))}
   </TableBody>
 );

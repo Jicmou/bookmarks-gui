@@ -62,3 +62,7 @@ export const deleteBookmark = (fetch: Fetch) => (apiUrl: string) => (
     }
     return Promise.resolve(response);
   });
+
+export const removeBookmarkFromList = (bookmarkList: types.TBookmarkList) => (
+  bookmarkId: number,
+) => bookmarkList.filter(bookmark => bookmark.id !== bookmarkId);

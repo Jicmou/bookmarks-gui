@@ -12,7 +12,9 @@ import { columnList, ColumnList } from './bookmark-table/columnList';
 import {
   getBookmarkList,
   createBookmark,
+  deleteBookmark,
   IServerErrorMessage,
+  removeBookmarkFromList,
 } from './bookmark.service';
 
 export interface IAppProps {
@@ -36,21 +38,6 @@ export interface IInputEvent {
 export interface IPreventEvent {
   preventDefault: () => void;
 }
-
-// const styles = (theme: any) => ({
-//   paper: {
-//     backgroundColor: theme.palette.background.paper,
-//     boxShadow: theme.shadows[5],
-//     padding: theme.spacing.unit * 4,
-//     position: 'absolute',
-//     width: theme.spacing.unit * 50,
-//   },
-// });
-
-// type SetInputState = (partialState: { inputValue: string }) => void;
-// type SetModalState = (
-//   partialState: { modalOpen: boolean; modalMessage: string },
-// ) => void;
 
 class App extends React.Component<IAppProps, IAppState> {
   constructor(props: IAppProps) {
@@ -81,6 +68,7 @@ class App extends React.Component<IAppProps, IAppState> {
             bookmarkList={this.state.bookmarkList}
             columnList={this.state.columnList}
             inputValue={this.state.inputValue}
+            onDelete={this.handleDelete()}
             onFormSubmit={this.handleFormSubmit(this.state)}
             onInputChange={this.handleInputChange()}
           />
@@ -98,6 +86,10 @@ class App extends React.Component<IAppProps, IAppState> {
         </Modal>
       </div>
     );
+  }
+
+  private handleDelete() {
+    return (bookmarkId: number) => () => this.deleteBookmark(bookmarkId);
   }
 
   private handleFormSubmit(state: IAppState) {
@@ -140,6 +132,18 @@ class App extends React.Component<IAppProps, IAppState> {
             modalOpen: true,
           });
         });
+  }
+
+  private deleteBookmark(bookmarkId: number) {
+    return deleteBookmark(this.props.fetch)(this.state.apiUrl)(bookmarkId).then(
+      () => {
+        this.setState({
+          bookmarkList: removeBookmarkFromList(this.state.bookmarkList)(
+            bookmarkId,
+          ),
+        });
+      },
+    );
   }
 
   private retrieveBookmarkList() {

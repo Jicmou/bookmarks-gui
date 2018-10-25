@@ -13,13 +13,17 @@ import { TBookmarkList } from './bookmark.type';
 export interface IBookmarkTableProps {
   columnList: ColumnList;
   bookmarkList: TBookmarkList;
+  onDelete: (bookmarkId: number) => () => void;
 }
 
 export const BookmarkTable = (props: IBookmarkTableProps) => (
   <Paper className="bookmark-table-container" elevation={1}>
     <Table className="bookmark-table">
       <BookmarkTableHeader columnList={props.columnList} />
-      <BookmarkTableBody bookmarkList={props.bookmarkList} />
+      <BookmarkTableBody
+        bookmarkList={props.bookmarkList}
+        onDelete={props.onDelete}
+      />
     </Table>
   </Paper>
 );

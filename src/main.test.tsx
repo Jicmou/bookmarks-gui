@@ -7,6 +7,8 @@ import { MOCK_HANDLER } from './testing/handler.mock';
 
 import { Main } from './main';
 
+const mockCurriedHandler = () => MOCK_HANDLER;
+
 const renderBookmarkList = (container: HTMLElement) => {
   ReactDOM.render(
     <Main
@@ -15,6 +17,7 @@ const renderBookmarkList = (container: HTMLElement) => {
       inputValue=""
       onInputChange={MOCK_HANDLER}
       onFormSubmit={MOCK_HANDLER}
+      onDelete={mockCurriedHandler}
     />,
     container,
   );

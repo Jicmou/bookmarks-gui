@@ -3,6 +3,7 @@ export enum EColumns {
   AUTHOR_NAME = 'author',
   TITLE = 'title',
   URL = 'url',
+  DELETE = '',
 }
 
 export type ColumnList = EColumns[];
@@ -12,4 +13,5 @@ export const columnList: ColumnList = [
   EColumns.URL,
   EColumns.AUTHOR_NAME,
   EColumns.CREATION_DATE,
+  EColumns.DELETE,
 ];
