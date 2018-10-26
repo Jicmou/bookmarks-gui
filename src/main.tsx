@@ -6,7 +6,7 @@ import { BookmarkTable } from './bookmark-table/bookmark-table';
 import { ColumnList } from './bookmark-table/columnList';
 import { TBookmarkList } from './bookmark-table/bookmark.type';
 
-import { IPreventEvent, IInputEvent } from './App';
+import { IPreventEvent, IInputEvent } from './App.type';
 
 interface IMainProps {
   bookmarkList: TBookmarkList;
