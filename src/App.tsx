@@ -21,14 +21,17 @@ export interface IAppProps {
   fetch: Fetch;
 }
 
+interface IModalState {
+  message: string;
+  open: boolean;
+}
+
 export interface IAppState {
   apiUrl: string;
   bookmarkList: TBookmarkList;
   columnList: ColumnList;
   inputValue: string;
-  modalMessage: string;
-  modalOpen: boolean;
-  modalAnchor: HTMLElement | null | undefined;
+  modal: IModalState;
 }
 
 export interface IInputEvent {
@@ -47,9 +50,10 @@ class App extends React.Component<IAppProps, IAppState> {
       bookmarkList: [],
       columnList,
       inputValue: '',
-      modalAnchor: undefined,
-      modalMessage: '',
-      modalOpen: false,
+      modal: {
+        message: '',
+        open: false,
+      },
     };
   }
   public componentDidMount() {
@@ -77,11 +81,11 @@ class App extends React.Component<IAppProps, IAppState> {
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           className="modal"
-          open={this.state.modalOpen}
+          open={this.state.modal.open}
           onClose={this.handleModalClose()}
         >
           <div className="modal-content" id="simple-modal-descriptio">
-            {this.state.modalMessage}
+            {this.state.modal.message}
           </div>
         </Modal>
       </div>
@@ -110,8 +114,10 @@ class App extends React.Component<IAppProps, IAppState> {
   private handleModalClose() {
     return () => {
       this.setState({
-        modalMessage: '',
-        modalOpen: false,
+        modal: {
+          message: '',
+          open: false,
+        },
       });
     };
   }
@@ -123,13 +129,14 @@ class App extends React.Component<IAppProps, IAppState> {
           this.setState({
             bookmarkList: [...this.state.bookmarkList, bookmark],
             inputValue: '',
-            modalAnchor: event.currentTarget as HTMLElement,
           });
         })
         .catch((errorMessage: IServerErrorMessage) => {
           this.setState({
-            modalMessage: errorMessage.message,
-            modalOpen: true,
+            modal: {
+              message: errorMessage.message,
+              open: true,
+            },
           });
         });
   }
