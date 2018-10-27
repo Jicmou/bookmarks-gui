@@ -3,11 +3,11 @@ import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-import { IPreventEvent, IInputEvent } from '../App.type';
+import { IPreventEvent, ITargetValueEvent } from '../App.type';
 
 interface IBookmarkFormProps {
   inputValue: string;
-  onInputChange: (event: IInputEvent) => void;
+  onInputChange: (event: ITargetValueEvent) => void;
   onFormSubmit: (event: IPreventEvent) => void;
 }
 

@@ -1,9 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { ColumnList, EColumns } from './columnList';
-import { MOCK_BOOKMARK_LIST } from '../testing/bookmark.mock';
 import { MOCK_HANDLER } from '../testing/handler.mock';
+import { MOCK_TABLE } from '../testing/table.mock';
 
 import { BookmarkTable, IBookmarkTableProps } from './bookmark-table';
 
@@ -12,9 +11,10 @@ const renderBookmarkList = (container: HTMLElement) => (
 ) => {
   ReactDOM.render(
     <BookmarkTable
-      bookmarkList={props.bookmarkList}
-      columnList={props.columnList}
-      onDelete={() => MOCK_HANDLER}
+      onChangePage={props.onChangePage}
+      onChangeRowsPerPage={props.onChangeRowsPerPage}
+      onDelete={props.onDelete}
+      table={props.table}
     />,
     container,
   );
@@ -22,10 +22,10 @@ const renderBookmarkList = (container: HTMLElement) => (
 };
 
 it('renders without crashing', () => {
-  const MOCK_COLUMN_LIST: ColumnList = [EColumns.TITLE, EColumns.URL];
   renderBookmarkList(document.createElement('div'))({
-    bookmarkList: MOCK_BOOKMARK_LIST,
-    columnList: MOCK_COLUMN_LIST,
+    onChangePage: MOCK_HANDLER,
+    onChangeRowsPerPage: MOCK_HANDLER,
     onDelete: () => MOCK_HANDLER,
+    table: MOCK_TABLE,
   });
 });
