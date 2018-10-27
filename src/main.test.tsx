@@ -8,7 +8,7 @@ import { Main } from './main';
 
 const mockCurriedHandler = () => MOCK_HANDLER;
 
-const renderBookmarkList = (container: HTMLElement) => {
+const renderMain = (container: HTMLElement) => {
   ReactDOM.render(
     <Main
       inputValue=""
@@ -25,5 +25,5 @@ const renderBookmarkList = (container: HTMLElement) => {
 };
 
 it('renders without crashing', () => {
-  renderBookmarkList(document.createElement('div'));
+  renderMain(document.createElement('div'));
 });

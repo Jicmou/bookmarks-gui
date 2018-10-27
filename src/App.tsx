@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import Modal from '@material-ui/core/Modal';
 
 import { Main } from './main';
@@ -47,15 +49,22 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
           <h1 className="App-title">Bookmark Manager</h1>
         </header>
         <div className="main">
-          <Main
-            inputValue={this.state.inputValue}
-            onChangePage={this.handleChangePage()}
-            onChangeRowsPerPage={this.handleChangeRowsPerPage()}
-            onDelete={this.handleDelete()}
-            onFormSubmit={this.handleFormSubmit(this.state)}
-            onInputChange={this.handleInputChange()}
-            table={this.state.table}
-          />
+          <Router>
+            <Route
+              path="/"
+              component={() => (
+                <Main
+                  inputValue={this.state.inputValue}
+                  onChangePage={this.handleChangePage()}
+                  onChangeRowsPerPage={this.handleChangeRowsPerPage()}
+                  onDelete={this.handleDelete()}
+                  onFormSubmit={this.handleFormSubmit(this.state)}
+                  onInputChange={this.handleInputChange()}
+                  table={this.state.table}
+                />
+              )}
+            />
+          </Router>
         </div>
         <Modal
           aria-labelledby="simple-modal-title"
