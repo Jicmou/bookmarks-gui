@@ -1,59 +1,36 @@
 import * as React from 'react';
+import Modal from '@material-ui/core/Modal';
+
+import { Main } from './main';
+import { columnList } from './bookmark-table/columnList';
+import { IServerErrorMessage } from './bookmark.service.type';
+
+import * as types from './App.type';
+
+import logo from './logo.svg';
 import './App.css';
 
-import Modal from '@material-ui/core/Modal';
-// import Popover from '@material-ui/core/Popover';
-import logo from './logo.svg';
+const API_URL = 'http://localhost:8000';
+const MODAL_INIT_VALUE = {
+  message: '',
+  open: false,
+};
+const TABLE_INIT_VALUE = {
+  columnList,
+  currentPage: 0,
+  paginatedBookmarkList: [],
+  rowsPerPage: types.ERowsPerPAge.FIVE,
+};
 
-import { Fetch } from './types/fetch.type';
-import { Main } from './main';
-import { TBookmarkList } from './bookmark-table/bookmark.type';
-import { columnList, ColumnList } from './bookmark-table/columnList';
-import {
-  getBookmarkList,
-  createBookmark,
-  deleteBookmark,
-  IServerErrorMessage,
-  removeBookmarkFromList,
-} from './bookmark.service';
-
-export interface IAppProps {
-  fetch: Fetch;
-}
-
-interface IModalState {
-  message: string;
-  open: boolean;
-}
-
-export interface IAppState {
-  apiUrl: string;
-  bookmarkList: TBookmarkList;
-  columnList: ColumnList;
-  inputValue: string;
-  modal: IModalState;
-}
-
-export interface IInputEvent {
-  target: { value: string };
-}
-
-export interface IPreventEvent {
-  preventDefault: () => void;
-}
-
-class App extends React.Component<IAppProps, IAppState> {
-  constructor(props: IAppProps) {
+class App extends React.Component<types.IAppProps, types.IAppState> {
+  constructor(props: types.IAppProps) {
     super(props);
     this.state = {
-      apiUrl: 'http://localhost:8000',
+      apiUrl: API_URL,
       bookmarkList: [],
-      columnList,
       inputValue: '',
-      modal: {
-        message: '',
-        open: false,
-      },
+      modal: MODAL_INIT_VALUE,
+      table: TABLE_INIT_VALUE,
     };
   }
   public componentDidMount() {
@@ -70,7 +47,7 @@ class App extends React.Component<IAppProps, IAppState> {
         <div className="main">
           <Main
             bookmarkList={this.state.bookmarkList}
-            columnList={this.state.columnList}
+            columnList={this.state.table.columnList}
             inputValue={this.state.inputValue}
             onDelete={this.handleDelete()}
             onFormSubmit={this.handleFormSubmit(this.state)}
@@ -96,7 +73,7 @@ class App extends React.Component<IAppProps, IAppState> {
     return (bookmarkId: number) => () => this.deleteBookmark(bookmarkId);
   }
 
-  private handleFormSubmit(state: IAppState) {
+  private handleFormSubmit(state: types.IAppState) {
     return (event: Event) => {
       event.preventDefault();
       this.createBookmark(event)(state.inputValue);
@@ -104,7 +81,7 @@ class App extends React.Component<IAppProps, IAppState> {
   }
 
   private handleInputChange() {
-    return (event: IInputEvent) => {
+    return (event: types.IInputEvent) => {
       this.setState({
         inputValue: event.target.value,
       });
@@ -124,7 +101,8 @@ class App extends React.Component<IAppProps, IAppState> {
 
   private createBookmark(event: Event) {
     return (link: string) =>
-      createBookmark(this.props.fetch)(this.state.apiUrl)(link)
+      this.props.bookmarkService
+        .createBookmark(this.props.fetch)(this.state.apiUrl)(link)
         .then(bookmark => {
           this.setState({
             bookmarkList: [...this.state.bookmarkList, bookmark],
@@ -142,25 +120,25 @@ class App extends React.Component<IAppProps, IAppState> {
   }
 
   private deleteBookmark(bookmarkId: number) {
-    return deleteBookmark(this.props.fetch)(this.state.apiUrl)(bookmarkId).then(
-      () => {
+    return this.props.bookmarkService
+      .deleteBookmark(this.props.fetch)(this.state.apiUrl)(bookmarkId)
+      .then(() => {
         this.setState({
-          bookmarkList: removeBookmarkFromList(this.state.bookmarkList)(
-            bookmarkId,
-          ),
+          bookmarkList: this.props.bookmarkService.removeBookmarkFromList(
+            this.state.bookmarkList,
+          )(bookmarkId),
         });
-      },
-    );
+      });
   }
 
   private retrieveBookmarkList() {
-    return getBookmarkList(this.props.fetch)(this.state.apiUrl).then(
-      bookmarkList => {
+    return this.props.bookmarkService
+      .getBookmarkList(this.props.fetch)(this.state.apiUrl)
+      .then(bookmarkList => {
         this.setState({
           bookmarkList,
         });
-      },
-    );
+      });
   }
 }
 

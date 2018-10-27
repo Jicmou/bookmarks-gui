@@ -1,14 +1,10 @@
-import * as types from './bookmark-table/bookmark.type';
-import { Fetch, ERedirect, EMethod } from './types/fetch.type';
-
-export interface IServerErrorMessage {
-  code: number;
-  message: string;
-}
+import * as bookmarkTypes from './bookmark-table/bookmark.type';
+import * as types from './bookmark.service.type';
+import { Fetch, EMethod, ERedirect } from './types/fetch.type';
 
 export const fromJSONToBookmark = (
-  bookmarkJSON: types.IBookmarkJSON,
-): types.IBookmark => ({
+  bookmarkJSON: bookmarkTypes.IBookmarkJSON,
+): bookmarkTypes.IBookmark => ({
   authorName: bookmarkJSON.authorName,
   creationDate: new Date(bookmarkJSON.creationDate),
   duration: bookmarkJSON.duration,
@@ -26,10 +22,10 @@ export const getBookmarkList = (fetch: Fetch) => (apiUrl: string) =>
     redirect: ERedirect.FOLLOW,
   })
     .then(response => response.json())
-    .then((body: types.IGetBookmarkListResponse) =>
+    .then((body: bookmarkTypes.IGetBookmarkListResponse) =>
       body.bookmarkList.map(fromJSONToBookmark),
     )
-    .catch(() => [] as types.TBookmarkList);
+    .catch(() => [] as bookmarkTypes.TBookmarkList);
 
 export const createBookmark = (fetch: Fetch) => (apiUrl: string) => (
   link: string,
@@ -45,8 +41,10 @@ export const createBookmark = (fetch: Fetch) => (apiUrl: string) => (
     .then(
       body =>
         !body || body.code
-          ? Promise.reject(body as IServerErrorMessage)
-          : Promise.resolve((body as types.ICreateBookmarkResponse).bookmark),
+          ? Promise.reject(body as types.IServerErrorMessage)
+          : Promise.resolve(
+              (body as bookmarkTypes.ICreateBookmarkResponse).bookmark,
+            ),
     )
     .then(fromJSONToBookmark);
 
@@ -63,6 +61,7 @@ export const deleteBookmark = (fetch: Fetch) => (apiUrl: string) => (
     return Promise.resolve(response);
   });
 
-export const removeBookmarkFromList = (bookmarkList: types.TBookmarkList) => (
-  bookmarkId: number,
-) => bookmarkList.filter(bookmark => bookmark.id !== bookmarkId);
+export const removeBookmarkFromList = (
+  bookmarkList: bookmarkTypes.TBookmarkList,
+) => (bookmarkId: number) =>
+  bookmarkList.filter(bookmark => bookmark.id !== bookmarkId);
