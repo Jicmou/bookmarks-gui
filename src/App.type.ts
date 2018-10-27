@@ -8,7 +8,7 @@ export interface IAppProps {
   bookmarkService: IBookmarkService;
 }
 
-interface IModalState {
+export interface IModalState {
   message: string;
   open: boolean;
 }
@@ -19,11 +19,12 @@ export enum ERowsPerPAge {
   TWENTY_FIVE = 25,
 }
 
-interface ITableState {
+export interface ITableState {
   columnList: ColumnList;
   currentPage: number;
   paginatedBookmarkList: TBookmarkList;
   rowsPerPage: ERowsPerPAge;
+  bookmarkListLength: number;
 }
 
 export interface IAppState {
@@ -34,7 +35,7 @@ export interface IAppState {
   table: ITableState;
 }
 
-export interface IInputEvent {
+export interface ITargetValueEvent {
   target: { value: string };
 }
 

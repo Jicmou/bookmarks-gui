@@ -4,6 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import { Main } from './main';
 import { columnList } from './bookmark-table/columnList';
 import { IServerErrorMessage } from './bookmark.service.type';
+import { TBookmarkList } from './bookmark-table/bookmark.type';
 
 import * as types from './App.type';
 
@@ -11,11 +12,12 @@ import logo from './logo.svg';
 import './App.css';
 
 const API_URL = 'http://localhost:8000';
-const MODAL_INIT_VALUE = {
+const MODAL_INIT_VALUE: types.IModalState = {
   message: '',
   open: false,
 };
-const TABLE_INIT_VALUE = {
+const TABLE_INIT_VALUE: types.ITableState = {
+  bookmarkListLength: 0,
   columnList,
   currentPage: 0,
   paginatedBookmarkList: [],
@@ -34,7 +36,7 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
     };
   }
   public componentDidMount() {
-    this.retrieveBookmarkList();
+    return this.retrieveBookmarkList();
   }
 
   public render() {
@@ -46,12 +48,13 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
         </header>
         <div className="main">
           <Main
-            bookmarkList={this.state.bookmarkList}
-            columnList={this.state.table.columnList}
             inputValue={this.state.inputValue}
+            onChangePage={this.handleChangePage()}
+            onChangeRowsPerPage={this.handleChangeRowsPerPage()}
             onDelete={this.handleDelete()}
             onFormSubmit={this.handleFormSubmit(this.state)}
             onInputChange={this.handleInputChange()}
+            table={this.state.table}
           />
         </div>
         <Modal
@@ -69,6 +72,47 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
     );
   }
 
+  private updateTableContent(args: {
+    currentPage: number;
+    rowsPerPage: types.ERowsPerPAge;
+    bookmarkList: TBookmarkList;
+  }) {
+    this.setState({
+      table: {
+        ...this.state.table,
+        currentPage: args.currentPage,
+        paginatedBookmarkList: args.bookmarkList.slice(
+          args.currentPage * args.rowsPerPage,
+          args.currentPage * args.rowsPerPage + args.rowsPerPage,
+        ),
+        rowsPerPage: args.rowsPerPage,
+      },
+    });
+  }
+
+  private handleChangePage() {
+    return (
+      event: React.MouseEvent<HTMLButtonElement> | null,
+      page: number,
+    ) => {
+      this.updateTableContent({
+        bookmarkList: this.state.bookmarkList,
+        currentPage: page,
+        rowsPerPage: this.state.table.rowsPerPage,
+      });
+    };
+  }
+
+  private handleChangeRowsPerPage() {
+    return (event: types.ITargetValueEvent) => {
+      this.updateTableContent({
+        bookmarkList: this.state.bookmarkList,
+        currentPage: this.state.table.currentPage,
+        rowsPerPage: parseInt(event.target.value, 10),
+      });
+    };
+  }
+
   private handleDelete() {
     return (bookmarkId: number) => () => this.deleteBookmark(bookmarkId);
   }
@@ -81,7 +125,7 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
   }
 
   private handleInputChange() {
-    return (event: types.IInputEvent) => {
+    return (event: types.ITargetValueEvent) => {
       this.setState({
         inputValue: event.target.value,
       });
@@ -137,6 +181,15 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
       .then(bookmarkList => {
         this.setState({
           bookmarkList,
+          table: {
+            ...this.state.table,
+            bookmarkListLength: bookmarkList.length,
+          },
+        });
+        this.updateTableContent({
+          bookmarkList,
+          currentPage: this.state.table.currentPage,
+          rowsPerPage: this.state.table.rowsPerPage,
         });
       });
   }

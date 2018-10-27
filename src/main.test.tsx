@@ -1,9 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { MOCK_BOOKMARK_LIST } from './testing/bookmark.mock';
-import { MOCK_COLUMN_LIST } from './testing/column.mock';
 import { MOCK_HANDLER } from './testing/handler.mock';
+import { MOCK_TABLE } from './testing/table.mock';
 
 import { Main } from './main';
 
@@ -12,12 +11,13 @@ const mockCurriedHandler = () => MOCK_HANDLER;
 const renderBookmarkList = (container: HTMLElement) => {
   ReactDOM.render(
     <Main
-      bookmarkList={MOCK_BOOKMARK_LIST}
-      columnList={MOCK_COLUMN_LIST}
       inputValue=""
-      onInputChange={MOCK_HANDLER}
-      onFormSubmit={MOCK_HANDLER}
+      onChangePage={MOCK_HANDLER}
+      onChangeRowsPerPage={MOCK_HANDLER}
       onDelete={mockCurriedHandler}
+      onFormSubmit={MOCK_HANDLER}
+      onInputChange={MOCK_HANDLER}
+      table={MOCK_TABLE}
     />,
     container,
   );
