@@ -17,6 +17,11 @@ export interface IBookmarkService {
   removeBookmarkFromList: (
     bookmarkList: bookmarkTypes.TBookmarkList,
   ) => (bookmarkId: number) => bookmarkTypes.TBookmarkList;
+  getBookmarkDetailsWithTagList: (
+    fetch: Fetch,
+  ) => (
+    apiUrl: string,
+  ) => (id: number) => Promise<bookmarkTypes.IBookmarkWithTagList>;
 }
 
 export interface IServerErrorMessage {

@@ -25,7 +25,7 @@ export interface IBookmarkJSON {
   duration: number | null;
   height: number;
   id: number;
-  tagList: string[];
+  tags: string[];
   title: string;
   type: EType;
   url: string;

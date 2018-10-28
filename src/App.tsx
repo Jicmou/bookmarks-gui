@@ -33,6 +33,7 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
     this.state = {
       apiUrl: API_URL,
       bookmarkList: [],
+      currentBookmark: undefined,
       inputValue: '',
       modal: MODAL_INIT_VALUE,
       table: TABLE_INIT_VALUE,
@@ -68,7 +69,12 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
                   />
                 )}
               />
-              <Route path="/bookmark/:bookmarkId" component={BookmarkDetails} />
+              <Route
+                path="/bookmark/:bookmarkId"
+                component={() => (
+                  <BookmarkDetails bookmark={this.state.currentBookmark} />
+                )}
+              />
             </div>
           </Router>
         </div>
@@ -133,7 +139,7 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
   }
 
   private handleEdit() {
-    return (bookmarkId: number) => () => this.deleteBookmark(bookmarkId);
+    return (bookmarkId: number) => () => this.editBookmark(bookmarkId);
   }
 
   private handleFormSubmit(state: types.IAppState) {
@@ -192,6 +198,16 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
           )(bookmarkId),
         });
       });
+  }
+
+  private editBookmark(bookmarkId: number) {
+    return this.props.bookmarkService
+      .getBookmarkDetailsWithTagList(this.props.fetch)(this.state.apiUrl)(
+        bookmarkId,
+      )
+      .then(bookmarkDetails =>
+        this.setState({ currentBookmark: bookmarkDetails }),
+      );
   }
 
   private retrieveBookmarkList() {

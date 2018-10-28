@@ -158,7 +158,7 @@ describe('Bookmark service: ', () => {
     describe('GIVEN a valid id: ', () => {
       const mockBookmarkJson: IBookmarkJSON = {
         ...MOCK_BOOKMARK_JSON,
-        tagList: ['/v1/tags/1', '/v1/tags/2', '/v1/tags/3', '/v1/tags/4'],
+        tags: ['/v1/tags/1', '/v1/tags/2', '/v1/tags/3', '/v1/tags/4'],
       };
       const mockFetch = injectJsonSuccessResponseToFetch({
         bookmark: mockBookmarkJson,
@@ -178,7 +178,7 @@ describe('Bookmark service: ', () => {
           .then((bookmark: IBookmarkWithTagList) =>
             bookmark.tagList.map((tag, index) =>
               expect(tag.id).toBe(
-                getIdFromEndpoint(mockBookmarkJson.tagList[index]),
+                getIdFromEndpoint(mockBookmarkJson.tags[index]),
               ),
             ),
           );

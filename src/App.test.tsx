@@ -6,7 +6,11 @@ import * as bookmarkTypes from './bookmark-table/bookmark.type';
 import { Fetch } from './types/fetch.type';
 import { FETCH_STUB_SUCCESS } from './testing/fetch.stub';
 import { IBookmarkService } from './services/bookmark.service.type';
-import { MOCK_BOOKMARK, MOCK_BOOKMARK_LIST } from './testing/bookmark.mock';
+import {
+  MOCK_BOOKMARK,
+  MOCK_BOOKMARK_LIST,
+  MOCK_BOOKMARK_WITH_TAG_LIST,
+} from './testing/bookmark.mock';
 
 export interface IResponse {
   json: () => Promise<any>;
@@ -27,6 +31,9 @@ const bookmarkServicetub: IBookmarkService = {
     Promise.resolve(MOCK_RESPONSE),
   fromJSONToBookmark: (bookmarkJSON: bookmarkTypes.IBookmarkJSON) =>
     MOCK_BOOKMARK,
+  getBookmarkDetailsWithTagList: (fetch: Fetch) => (apiUrl: string) => (
+    id: number,
+  ) => Promise.resolve(MOCK_BOOKMARK_WITH_TAG_LIST),
   getBookmarkList: (fetch: Fetch) => (apiUrl: string) =>
     Promise.resolve(MOCK_BOOKMARK_LIST),
   removeBookmarkFromList: (bookmarkList: bookmarkTypes.TBookmarkList) => (
