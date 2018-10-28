@@ -1,6 +1,7 @@
 import * as bookmarkTypes from './bookmark-table/bookmark.type';
 import * as types from './bookmark.service.type';
 import { Fetch, EMethod, ERedirect } from './types/fetch.type';
+import { getTagListFromEndpointList } from './services/tag.service';
 
 export const fromJSONToBookmark = (
   bookmarkJSON: bookmarkTypes.IBookmarkJSON,
@@ -10,6 +11,7 @@ export const fromJSONToBookmark = (
   duration: bookmarkJSON.duration,
   height: bookmarkJSON.height,
   id: bookmarkJSON.id,
+  tagList: bookmarkJSON.tagList,
   title: bookmarkJSON.title,
   type: bookmarkJSON.type,
   url: bookmarkJSON.url,
@@ -42,9 +44,7 @@ export const createBookmark = (fetch: Fetch) => (apiUrl: string) => (
       body =>
         !body || body.code
           ? Promise.reject(body as types.IServerErrorMessage)
-          : Promise.resolve(
-              (body as bookmarkTypes.ICreateBookmarkResponse).bookmark,
-            ),
+          : Promise.resolve((body as bookmarkTypes.IBookmarkResponse).bookmark),
     )
     .then(fromJSONToBookmark);
 
@@ -65,3 +65,32 @@ export const removeBookmarkFromList = (
   bookmarkList: bookmarkTypes.TBookmarkList,
 ) => (bookmarkId: number) =>
   bookmarkList.filter(bookmark => bookmark.id !== bookmarkId);
+
+export const getBookmarkDetails = (fetch: Fetch) => (apiUrl: string) => (
+  id: number,
+) =>
+  fetch(`${apiUrl}/v1/bookmarks/${id.toString()}`, {
+    method: EMethod.GET,
+    redirect: ERedirect.FOLLOW,
+  })
+    .then(
+      response =>
+        response.ok ? Promise.resolve(response) : Promise.reject(response),
+    )
+    .then(
+      response => response.json() as Promise<bookmarkTypes.IBookmarkResponse>,
+    )
+    .then(body => fromJSONToBookmark(body.bookmark));
+
+export const getBookmarkDetailsWithTagList = (fetch: Fetch) => (
+  apiUrl: string,
+) => (id: number) =>
+  getBookmarkDetails(fetch)(apiUrl)(id).then(bookmark =>
+    getTagListFromEndpointList(fetch)(bookmark.tagList).then(
+      tagList =>
+        ({
+          ...bookmark,
+          tagList,
+        } as bookmarkTypes.IBookmarkWithTagList),
+    ),
+  );
