@@ -16,6 +16,7 @@ const renderBookmarkList = (container: HTMLElement) => (
     <BookmarkTableBody
       bookmarkList={props.bookmarkList}
       onDelete={() => MOCK_HANDLER}
+      onEdit={() => MOCK_HANDLER}
     />,
     container,
   );
@@ -26,5 +27,6 @@ it('renders without crashing', () => {
   renderBookmarkList(document.createElement('table'))({
     bookmarkList: MOCK_BOOKMARK_LIST,
     onDelete: () => MOCK_HANDLER,
+    onEdit: () => MOCK_HANDLER,
   });
 });

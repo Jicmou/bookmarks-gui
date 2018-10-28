@@ -14,6 +14,7 @@ const renderBookmarkTableRow = (container: HTMLElement) => (
       bookmark={props.bookmark}
       key={props.bookmark.id}
       onDelete={() => MOCK_HANDLER}
+      onEdit={() => MOCK_HANDLER}
     />,
     container,
   );
@@ -24,5 +25,6 @@ it('renders without crashing', () => {
   renderBookmarkTableRow(document.createElement('tbody'))({
     bookmark: MOCK_BOOKMARK,
     onDelete: () => MOCK_HANDLER,
+    onEdit: () => MOCK_HANDLER,
   });
 });

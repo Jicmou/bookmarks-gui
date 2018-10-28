@@ -15,6 +15,7 @@ interface IMainProps {
   onInputChange: (event: ITargetValueEvent) => void;
   onFormSubmit: (event: IPreventEvent) => void;
   onDelete: (bookmarkId: number) => () => void;
+  onEdit: (bookmarkId: number) => () => void;
   table: ITableState;
 }
 
@@ -27,6 +28,7 @@ export const Main = (props: IMainProps) => (
     />
     <BookmarkTable
       onDelete={props.onDelete}
+      onEdit={props.onEdit}
       onChangePage={props.onChangePage}
       onChangeRowsPerPage={props.onChangeRowsPerPage}
       table={props.table}

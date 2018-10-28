@@ -61,13 +61,14 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
                     onChangePage={this.handleChangePage()}
                     onChangeRowsPerPage={this.handleChangeRowsPerPage()}
                     onDelete={this.handleDelete()}
+                    onEdit={this.handleEdit()}
                     onFormSubmit={this.handleFormSubmit(this.state)}
                     onInputChange={this.handleInputChange()}
                     table={this.state.table}
                   />
                 )}
               />
-              <Route path="/bookmark" component={BookmarkDetails} />
+              <Route path="/bookmark/:bookmarkId" component={BookmarkDetails} />
             </div>
           </Router>
         </div>
@@ -128,6 +129,10 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
   }
 
   private handleDelete() {
+    return (bookmarkId: number) => () => this.deleteBookmark(bookmarkId);
+  }
+
+  private handleEdit() {
     return (bookmarkId: number) => () => this.deleteBookmark(bookmarkId);
   }
 
