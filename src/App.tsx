@@ -72,7 +72,14 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
               <Route
                 path="/bookmark/:bookmarkId"
                 component={() => (
-                  <BookmarkDetails bookmark={this.state.currentBookmark} />
+                  <BookmarkDetails
+                    bookmark={this.state.currentBookmark}
+                    tagForm={{
+                      inputValue: this.state.inputValue,
+                      onFormSubmit: this.handleFormSubmit(this.state),
+                      onInputChange: this.handleInputChange(),
+                    }}
+                  />
                 )}
               />
             </div>
