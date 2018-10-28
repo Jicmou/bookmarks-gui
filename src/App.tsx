@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
 
 import { Main } from './main';
+import { BookmarkDetails } from './bookmark-details/bookmark-details';
 import { columnList } from './bookmark-table/columnList';
 import { IServerErrorMessage } from './bookmark.service.type';
 import { TBookmarkList } from './bookmark-table/bookmark.type';
@@ -50,20 +51,24 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
         </header>
         <div className="main">
           <Router>
-            <Route
-              path="/"
-              component={() => (
-                <Main
-                  inputValue={this.state.inputValue}
-                  onChangePage={this.handleChangePage()}
-                  onChangeRowsPerPage={this.handleChangeRowsPerPage()}
-                  onDelete={this.handleDelete()}
-                  onFormSubmit={this.handleFormSubmit(this.state)}
-                  onInputChange={this.handleInputChange()}
-                  table={this.state.table}
-                />
-              )}
-            />
+            <div className="routes">
+              <Route
+                path="/"
+                exact={true}
+                component={() => (
+                  <Main
+                    inputValue={this.state.inputValue}
+                    onChangePage={this.handleChangePage()}
+                    onChangeRowsPerPage={this.handleChangeRowsPerPage()}
+                    onDelete={this.handleDelete()}
+                    onFormSubmit={this.handleFormSubmit(this.state)}
+                    onInputChange={this.handleInputChange()}
+                    table={this.state.table}
+                  />
+                )}
+              />
+              <Route path="/bookmark" component={BookmarkDetails} />
+            </div>
           </Router>
         </div>
         <Modal

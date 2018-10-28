@@ -11,28 +11,24 @@ interface IBookmarkFormProps {
   onFormSubmit: (event: IPreventEvent) => void;
 }
 
-export class BookmarkForm extends React.Component<IBookmarkFormProps> {
-  public render() {
-    return (
-      <form className="bookmark-form" onSubmit={this.props.onFormSubmit}>
-        <TextField
-          className="bookmark-form-input"
-          id="outlined-name"
-          label="Link"
-          margin="normal"
-          onChange={this.props.onInputChange}
-          value={this.props.inputValue}
-          variant="outlined"
-        />
-        <Button
-          className="bookmark-form-button"
-          color="primary"
-          type="submit"
-          variant="contained"
-        >
-          Add
-        </Button>
-      </form>
-    );
-  }
-}
+export const BookmarkForm = (props: IBookmarkFormProps) => (
+  <form className="bookmark-form" onSubmit={props.onFormSubmit}>
+    <TextField
+      className="bookmark-form-input"
+      id="outlined-name"
+      label="Link"
+      margin="normal"
+      onChange={props.onInputChange}
+      value={props.inputValue}
+      variant="outlined"
+    />
+    <Button
+      className="bookmark-form-button"
+      color="primary"
+      type="submit"
+      variant="contained"
+    >
+      Add
+    </Button>
+  </form>
+);
