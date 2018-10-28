@@ -6,7 +6,7 @@ import Modal from '@material-ui/core/Modal';
 import { Main } from './main';
 import { BookmarkDetails } from './bookmark-details/bookmark-details';
 import { columnList } from './bookmark-table/columnList';
-import { IServerErrorMessage } from './bookmark.service.type';
+import { IServerErrorMessage } from './services/bookmark.service.type';
 import { TBookmarkList } from './bookmark-table/bookmark.type';
 
 import * as types from './App.type';

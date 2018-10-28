@@ -5,7 +5,7 @@ import App from './App';
 import * as bookmarkTypes from './bookmark-table/bookmark.type';
 import { Fetch } from './types/fetch.type';
 import { FETCH_STUB_SUCCESS } from './testing/fetch.stub';
-import { IBookmarkService } from './bookmark.service.type';
+import { IBookmarkService } from './services/bookmark.service.type';
 import { MOCK_BOOKMARK, MOCK_BOOKMARK_LIST } from './testing/bookmark.mock';
 
 export interface IResponse {

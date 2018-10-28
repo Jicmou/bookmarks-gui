@@ -1,5 +1,5 @@
-import * as bookmarkTypes from './bookmark-table/bookmark.type';
-import { Fetch, IResponse } from './types/fetch.type';
+import * as bookmarkTypes from '../bookmark-table/bookmark.type';
+import { Fetch, IResponse } from '../types/fetch.type';
 
 export interface IBookmarkService {
   fromJSONToBookmark: (

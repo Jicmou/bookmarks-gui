@@ -1,17 +1,17 @@
 import {
   IBookmarkWithTagList,
   IBookmarkJSON,
-} from './bookmark-table/bookmark.type';
+} from '../bookmark-table/bookmark.type';
 import {
   MOCK_BOOKMARK,
   MOCK_BOOKMARK_JSON,
   MOCK_BOOKMARK_LIST,
   MOCK_BOOKMARK_RESPONSE_BODY,
-} from './testing/bookmark.mock';
+} from '../testing/bookmark.mock';
 import {
   injectJsonSuccessResponseToFetch,
   FETCH_STUB_404,
-} from './testing/fetch.stub';
+} from '../testing/fetch.stub';
 
 import * as testedModule from './bookmark.service';
 

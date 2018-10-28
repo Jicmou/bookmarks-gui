@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
-import * as bookmarkService from './bookmark.service';
+import * as bookmarkService from './services/bookmark.service';
 
 ReactDOM.render(
   <App fetch={fetch} bookmarkService={bookmarkService} />,
