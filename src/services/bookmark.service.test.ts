@@ -1,3 +1,4 @@
+import { TagList } from './../types/tag.type';
 import { MOCK_BOOKMARK_WITH_TAG_LIST } from './../testing/bookmark.mock';
 import {
   IBookmarkWithTagList,
@@ -250,6 +251,102 @@ describe('Bookmark service: ', () => {
             {
               id: 5678,
               name: 'bar',
+            },
+          ],
+        });
+      });
+    });
+  });
+  describe('attributeIdToNewTag(): ', () => {
+    describe(`GIVEN a empty tag list`, () => {
+      it('SHOULD return 1', () => {
+        expect(testedModule.attributeIdToNewTag([])).toBe(1);
+      });
+    });
+    describe(`GIVEN a tag list with one tag
+    AND tag id is 1`, () => {
+      const mockTagList: TagList = [
+        {
+          id: 1,
+          name: 'foo',
+        },
+      ];
+      it('SHOULD return 2', () => {
+        expect(testedModule.attributeIdToNewTag(mockTagList)).toBe(2);
+      });
+    });
+    describe(`GIVEN a tag list with multiple tags`, () => {
+      const mockTagList: TagList = [
+        {
+          id: 1,
+          name: 'foo',
+        },
+        {
+          id: 2,
+          name: 'foo',
+        },
+        {
+          id: 4,
+          name: 'foo',
+        },
+        {
+          id: 100,
+          name: 'foo',
+        },
+      ];
+      it('SHOULD return highest id + 1', () => {
+        expect(testedModule.attributeIdToNewTag(mockTagList)).toBe(101);
+      });
+    });
+  });
+  describe('addTagToBookmarkTagList(): ', () => {
+    describe(`GIVEN a tag name
+    AND a bookmark with an empty tag list`, () => {
+      const mockBookmark: IBookmarkWithTagList = {
+        ...MOCK_BOOKMARK_WITH_TAG_LIST,
+        tagList: [],
+      };
+      const mockTagName = 'foo';
+      it('SHOULD add a newly created tag to the bookmark tag list', () => {
+        expect(
+          testedModule.addTagToBookmarkTagList(mockBookmark)(mockTagName),
+        ).toEqual({
+          ...mockBookmark,
+          tagList: [
+            {
+              id: 1,
+              name: mockTagName,
+            },
+          ],
+        });
+      });
+    });
+    describe(`GIVEN a tag name
+    AND a bookmark with a tag list
+    AND highest tag id is 999`, () => {
+      const mockBookmark: IBookmarkWithTagList = {
+        ...MOCK_BOOKMARK_WITH_TAG_LIST,
+        tagList: [
+          {
+            id: 999,
+            name: 'bar',
+          },
+          {
+            id: 1,
+            name: 'baz',
+          },
+        ],
+      };
+      const mockTagName = 'foo';
+      it('SHOULD add a newly created tag to the bookmark tag list', () => {
+        expect(
+          testedModule.addTagToBookmarkTagList(mockBookmark)(mockTagName),
+        ).toEqual({
+          ...mockBookmark,
+          tagList: [
+            {
+              id: 1000,
+              name: mockTagName,
             },
           ],
         });

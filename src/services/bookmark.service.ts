@@ -1,3 +1,4 @@
+import { TagList } from './../types/tag.type';
 import * as bookmarkTypes from '../bookmark-table/bookmark.type';
 import * as types from './bookmark.service.type';
 import { Fetch, EMethod, ERedirect } from '../types/fetch.type';
@@ -100,4 +101,19 @@ export const removeTagFromBookmarkById = (
 ) => (tagId: number): bookmarkTypes.IBookmarkWithTagList => ({
   ...bookmark,
   tagList: bookmark.tagList.filter(tag => tag.id !== tagId),
+});
+
+export const attributeIdToNewTag = (tagList: TagList) =>
+  Math.max(...tagList.map(tag => tag.id), 0) + 1;
+
+export const addTagToBookmarkTagList = (
+  bookmark: bookmarkTypes.IBookmarkWithTagList,
+) => (tagName: string): bookmarkTypes.IBookmarkWithTagList => ({
+  ...bookmark,
+  tagList: [
+    {
+      id: attributeIdToNewTag(bookmark.tagList),
+      name: tagName,
+    },
+  ],
 });
