@@ -14,6 +14,7 @@ interface IBookmarkFormProps {
 export const BookmarkForm = (props: IBookmarkFormProps) => (
   <form className="bookmark-form" onSubmit={props.onFormSubmit}>
     <TextField
+      autoFocus={true}
       className="bookmark-form-input"
       id="outlined-name"
       label="Link"
