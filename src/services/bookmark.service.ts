@@ -111,6 +111,7 @@ export const addTagToBookmarkTagList = (
 ) => (tagName: string): bookmarkTypes.IBookmarkWithTagList => ({
   ...bookmark,
   tagList: [
+    ...bookmark.tagList,
     {
       id: attributeIdToNewTag(bookmark.tagList),
       name: tagName,

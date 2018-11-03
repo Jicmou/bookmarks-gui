@@ -344,6 +344,7 @@ describe('Bookmark service: ', () => {
         ).toEqual({
           ...mockBookmark,
           tagList: [
+            ...mockBookmark.tagList,
             {
               id: 1000,
               name: mockTagName,
