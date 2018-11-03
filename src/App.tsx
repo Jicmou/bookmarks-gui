@@ -5,39 +5,19 @@ import Modal from '@material-ui/core/Modal';
 
 import { Main } from './main';
 import { BookmarkPage } from './bookmark-page/bookmark-page';
-import { columnList } from './bookmark-table/columnList';
 import { IServerErrorMessage } from './services/bookmark.service.type';
 import { TBookmarkList } from './bookmark-table/bookmark.type';
 
 import * as types from './App.type';
+import { INITIAL_STATE } from './App.init';
 
 import logo from './logo.svg';
 import './App.css';
 
-const API_URL = 'http://localhost:8000';
-const MODAL_INIT_VALUE: types.IModalState = {
-  message: '',
-  open: false,
-};
-const TABLE_INIT_VALUE: types.ITableState = {
-  bookmarkListLength: 0,
-  columnList,
-  currentPage: 0,
-  paginatedBookmarkList: [],
-  rowsPerPage: types.ERowsPerPAge.FIVE,
-};
-
 class App extends React.Component<types.IAppProps, types.IAppState> {
   constructor(props: types.IAppProps) {
     super(props);
-    this.state = {
-      apiUrl: API_URL,
-      bookmarkList: [],
-      currentBookmark: undefined,
-      inputValue: '',
-      modal: MODAL_INIT_VALUE,
-      table: TABLE_INIT_VALUE,
-    };
+    this.state = INITIAL_STATE;
   }
   public componentDidMount() {
     return this.retrieveBookmarkList();

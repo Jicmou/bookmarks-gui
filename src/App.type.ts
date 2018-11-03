@@ -30,6 +30,10 @@ export interface ITableState {
   bookmarkListLength: number;
 }
 
+export interface ITagFormState {
+  inputValue: string;
+}
+
 export interface IAppState {
   apiUrl: string;
   bookmarkList: TBookmarkList;
@@ -37,6 +41,7 @@ export interface IAppState {
   inputValue: string;
   modal: IModalState;
   table: ITableState;
+  tagForm: ITagFormState;
 }
 
 export interface ITargetValueEvent {
