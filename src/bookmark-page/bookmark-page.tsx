@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { IBookmarkWithTagList } from '../bookmark-table/bookmark.type';
 import { TagForm, ITagFormProps } from './tag-form';
 import { TagItem } from './tag-item';
+import { BookmarkDetails } from './bookmark-details';
 
 export interface IBookmarkDetailsProps {
   bookmark: IBookmarkWithTagList | undefined;
@@ -14,29 +15,7 @@ export const BookmarkPage = (props: IBookmarkDetailsProps) =>
     <div className="bookmark-body">
       <Link to="/">Home</Link>
       <h1 className="bookmark-title">{props.bookmark.title}</h1>
-      <ul className="bookmark-details">
-        <li>
-          <span>authorName: {props.bookmark.authorName}</span>
-        </li>
-        <li>
-          <span>creationDate: {props.bookmark.creationDate.toString()}</span>
-        </li>
-        <li>
-          <span>duration: {props.bookmark.duration}</span>
-        </li>
-        <li>
-          <span>height: {props.bookmark.height}</span>
-        </li>
-        <li>
-          <span>type: {props.bookmark.type}</span>
-        </li>
-        <li>
-          <span>url: {props.bookmark.url}</span>
-        </li>
-        <li>
-          <span>width: {props.bookmark.width}</span>
-        </li>
-      </ul>
+      <BookmarkDetails bookmark={props.bookmark} />
       <ul className="bookmark-details-tag-list">
         {props.bookmark.tagList.map(tag => (
           <TagItem
