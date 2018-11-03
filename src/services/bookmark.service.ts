@@ -86,7 +86,7 @@ export const getBookmarkDetailsWithTagList = (fetch: Fetch) => (
   apiUrl: string,
 ) => (id: number) =>
   getBookmarkDetails(fetch)(apiUrl)(id).then(bookmark =>
-    getTagListFromEndpointList(fetch)(bookmark.tagList).then(
+    getTagListFromEndpointList(fetch)(apiUrl)(bookmark.tagList).then(
       tagList =>
         ({
           ...bookmark,

@@ -30,14 +30,14 @@ describe('TagService: ', () => {
     describe('GIVEN an empty list: ', () => {
       it('SHOULD eventually resolve to an empty list', () =>
         testedModule
-          .getTagListFromEndpointList(FETCH_STUB_SUCCESS)([])
+          .getTagListFromEndpointList(FETCH_STUB_SUCCESS)('foo')([])
           .then((tagList: TagList) => expect(tagList.length).toBe(0)));
     });
     describe(`GIVEN a list og one endpoint:
     AND that endpoint is invalid`, () => {
       it('SHOULD eventually resolve to an empty list', () =>
         testedModule
-          .getTagListFromEndpointList(FETCH_STUB_404)([
+          .getTagListFromEndpointList(FETCH_STUB_404)('foo')([
             `/v1/tags/${Number.MAX_SAFE_INTEGER}`,
           ])
           .then((tagList: TagList) => expect(tagList.length).toBe(0)));
@@ -48,7 +48,7 @@ describe('TagService: ', () => {
         testedModule
           .getTagListFromEndpointList(
             injectJsonSuccessResponseToFetch(MOCK_TAG_RESPONSE_BODY),
-          )([`/v1/tags/${Number.MAX_SAFE_INTEGER}`])
+          )('foo')([`/v1/tags/${Number.MAX_SAFE_INTEGER}`])
           .then((tagList: TagList) =>
             expect(tagList).toEqual([MOCK_TAG_RESPONSE_BODY.tag]),
           ));

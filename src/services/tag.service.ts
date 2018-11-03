@@ -14,10 +14,12 @@ export const getTagByEndpoint = (fetch: Fetch) => (endPoint: string) =>
   }).then(response => response.json());
 
 export const getTagListFromEndpointList = (fetch: Fetch) => (
-  endPointList: string[],
-) =>
+  apiUrl: string,
+) => (endPointList: string[]) =>
   Promise.all(
-    endPointList.map(endPoint => getTagByEndpoint(fetch)(endPoint)),
+    endPointList.map(endPoint =>
+      getTagByEndpoint(fetch)(`${apiUrl}${endPoint}`),
+    ),
   ).then(bodyList =>
     bodyList
       .filter((body): body is ITagResponse => body.tag)
