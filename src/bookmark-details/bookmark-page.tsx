@@ -1,17 +1,20 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { IBookmarkWithTagList } from '../bookmark-table/bookmark.type';
 import { TagForm, ITagFormProps } from './tag-form';
+import { TagItem } from './tag-item';
 
 export interface IBookmarkDetailsProps {
   bookmark: IBookmarkWithTagList | undefined;
   tagForm: ITagFormProps;
 }
 
-export const BookmarkDetails = (props: IBookmarkDetailsProps) =>
+export const BookmarkPage = (props: IBookmarkDetailsProps) =>
   props.bookmark ? (
-    <div className="bookmark-details-body">
-      <h1 className="bookmark-details-title">{props.bookmark.title}</h1>
-      <ul className="bookmark-details-list">
+    <div className="bookmark-body">
+      <Link to="/">Home</Link>
+      <h1 className="bookmark-title">{props.bookmark.title}</h1>
+      <ul className="bookmark-details">
         <li>
           <span>authorName: {props.bookmark.authorName}</span>
         </li>
@@ -33,6 +36,18 @@ export const BookmarkDetails = (props: IBookmarkDetailsProps) =>
         <li>
           <span>width: {props.bookmark.width}</span>
         </li>
+      </ul>
+      <ul className="bookmark-details-tag-list">
+        {props.bookmark.tagList.map(tag => (
+          <TagItem
+            key={`tag-key-${tag.id}`}
+            tag={tag}
+            onTagRemove={(tagId: number) => () => {
+              // tslint:disable-next-line:no-console
+              console.log(tagId);
+            }}
+          />
+        ))}
       </ul>
       <TagForm
         inputValue={props.tagForm.inputValue}

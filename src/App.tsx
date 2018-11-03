@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
 
 import { Main } from './main';
-import { BookmarkDetails } from './bookmark-details/bookmark-details';
+import { BookmarkPage } from './bookmark-details/bookmark-page';
 import { columnList } from './bookmark-table/columnList';
 import { IServerErrorMessage } from './services/bookmark.service.type';
 import { TBookmarkList } from './bookmark-table/bookmark.type';
@@ -72,7 +72,7 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
               <Route
                 path="/bookmark/:bookmarkId"
                 component={() => (
-                  <BookmarkDetails
+                  <BookmarkPage
                     bookmark={this.state.currentBookmark}
                     tagForm={{
                       inputValue: this.state.inputValue,

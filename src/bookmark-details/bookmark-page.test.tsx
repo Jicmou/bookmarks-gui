@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-import { BookmarkDetails, IBookmarkDetailsProps } from './bookmark-details';
+import { BookmarkPage, IBookmarkDetailsProps } from './bookmark-page';
 import { MOCK_BOOKMARK_WITH_TAG_LIST } from '../testing/bookmark.mock';
 import { MOCK_HANDLER } from '../testing/handler.mock';
 
@@ -17,10 +18,9 @@ const mockProps: IBookmarkDetailsProps = {
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
-    <BookmarkDetails
-      bookmark={mockProps.bookmark}
-      tagForm={mockProps.tagForm}
-    />,
+    <Router>
+      <BookmarkPage bookmark={mockProps.bookmark} tagForm={mockProps.tagForm} />
+    </Router>,
     div,
   );
   ReactDOM.unmountComponentAtNode(div);
