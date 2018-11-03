@@ -19,6 +19,7 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
     super(props);
     this.state = INITIAL_STATE;
   }
+
   public componentDidMount() {
     return this.retrieveBookmarkList();
   }
@@ -147,13 +148,7 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
 
   private handleTagRemove() {
     return (tagId: number) => () => {
-      if (this.state.currentBookmark) {
-        this.setState({
-          currentBookmark: this.props.bookmarkService.removeTagFromBookmarkById(
-            this.state.currentBookmark,
-          )(tagId),
-        });
-      }
+      this.removeTagFromBookmarkById(tagId);
     };
   }
 
@@ -227,6 +222,16 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
           rowsPerPage: this.state.table.rowsPerPage,
         });
       });
+  }
+
+  private removeTagFromBookmarkById(tagId: number) {
+    if (this.state.currentBookmark) {
+      this.setState({
+        currentBookmark: this.props.bookmarkService.removeTagFromBookmarkById(
+          this.state.currentBookmark,
+        )(tagId),
+      });
+    }
   }
 }
 
