@@ -1,4 +1,4 @@
-import { ITag } from '../types/tag.type';
+import { TagList } from '../types/tag.type';
 export enum EType {
   PHOTO = 'photo',
   VIDEO = 'video',
@@ -38,7 +38,7 @@ export interface IBookmarkWithTagList {
   duration: number | null;
   height: number;
   id: number;
-  tagList: ITag[];
+  tagList: TagList;
   title: string;
   type: EType;
   url: string;
