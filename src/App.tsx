@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
 
 import { Main } from './main';
-import { BookmarkPage } from './bookmark-details/bookmark-page';
+import { BookmarkPage } from './bookmark-page/bookmark-page';
 import { columnList } from './bookmark-table/columnList';
 import { IServerErrorMessage } from './services/bookmark.service.type';
 import { TBookmarkList } from './bookmark-table/bookmark.type';
