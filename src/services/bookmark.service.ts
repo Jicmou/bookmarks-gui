@@ -94,3 +94,10 @@ export const getBookmarkDetailsWithTagList = (fetch: Fetch) => (
         } as bookmarkTypes.IBookmarkWithTagList),
     ),
   );
+
+export const removeTagFromBookmarkById = (
+  bookmark: bookmarkTypes.IBookmarkWithTagList,
+) => (tagId: number): bookmarkTypes.IBookmarkWithTagList => ({
+  ...bookmark,
+  tagList: bookmark.tagList.filter(tag => tag.id !== tagId),
+});

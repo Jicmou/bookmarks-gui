@@ -1,3 +1,4 @@
+import { MOCK_BOOKMARK_WITH_TAG_LIST } from './../testing/bookmark.mock';
 import {
   IBookmarkWithTagList,
   IBookmarkJSON,
@@ -190,6 +191,68 @@ describe('Bookmark service: ', () => {
               ),
             ),
           );
+      });
+    });
+  });
+  describe('removeTagFromBookmarkById(): ', () => {
+    describe(`GIVEN a tag id,
+    AND a bookmark with an empty Tag List`, () => {
+      const mockBookmark: IBookmarkWithTagList = {
+        ...MOCK_BOOKMARK_WITH_TAG_LIST,
+        tagList: [],
+      };
+      it('SHOULD return a bookmark with an empty Tag List', () => {
+        expect(testedModule.removeTagFromBookmarkById(mockBookmark)(1)).toEqual(
+          mockBookmark,
+        );
+      });
+    });
+    describe(`GIVEN an tag id,
+    AND a bookmark whose tag list has no tag with given id`, () => {
+      const mockBookmark: IBookmarkWithTagList = {
+        ...MOCK_BOOKMARK_WITH_TAG_LIST,
+        tagList: [
+          {
+            id: 1234,
+            name: 'foo',
+          },
+        ],
+      };
+      it('SHOULD return a bookmark with an empty Tag List', () => {
+        expect(
+          testedModule.removeTagFromBookmarkById(mockBookmark)(
+            Number.MAX_SAFE_INTEGER,
+          ),
+        ).toEqual(mockBookmark);
+      });
+    });
+    describe(`GIVEN an tag id,
+    AND a bookmark whose tag list has one tag with given id`, () => {
+      const mockBookmark: IBookmarkWithTagList = {
+        ...MOCK_BOOKMARK_WITH_TAG_LIST,
+        tagList: [
+          {
+            id: 1234,
+            name: 'foo',
+          },
+          {
+            id: 5678,
+            name: 'bar',
+          },
+        ],
+      };
+      it('SHOULD return a bookmark whith same taglist, minus the tag with given id', () => {
+        expect(
+          testedModule.removeTagFromBookmarkById(mockBookmark)(1234),
+        ).toEqual({
+          ...mockBookmark,
+          tagList: [
+            {
+              id: 5678,
+              name: 'bar',
+            },
+          ],
+        });
       });
     });
   });
