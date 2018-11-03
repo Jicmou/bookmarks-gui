@@ -167,8 +167,13 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
 
   private handleTagRemove() {
     return (tagId: number) => () => {
-      // tslint:disable-next-line:no-console
-      console.log('TAG id: ', tagId);
+      if (this.state.currentBookmark) {
+        this.setState({
+          currentBookmark: this.props.bookmarkService.removeTagFromBookmarkById(
+            this.state.currentBookmark,
+          )(tagId),
+        });
+      }
     };
   }
 

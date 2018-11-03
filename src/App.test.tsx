@@ -39,6 +39,9 @@ const bookmarkServicetub: IBookmarkService = {
   removeBookmarkFromList: (bookmarkList: bookmarkTypes.TBookmarkList) => (
     bookmarkId: number,
   ) => MOCK_BOOKMARK_LIST,
+  removeTagFromBookmarkById: (bookmark: bookmarkTypes.IBookmarkWithTagList) => (
+    tagId: number,
+  ) => MOCK_BOOKMARK_WITH_TAG_LIST,
 };
 
 it('renders without crashing', () => {

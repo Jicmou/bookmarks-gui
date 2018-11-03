@@ -17,6 +17,9 @@ export interface IBookmarkService {
   removeBookmarkFromList: (
     bookmarkList: bookmarkTypes.TBookmarkList,
   ) => (bookmarkId: number) => bookmarkTypes.TBookmarkList;
+  removeTagFromBookmarkById: (
+    bookmark: bookmarkTypes.IBookmarkWithTagList,
+  ) => (tagId: number) => bookmarkTypes.IBookmarkWithTagList;
   getBookmarkDetailsWithTagList: (
     fetch: Fetch,
   ) => (
