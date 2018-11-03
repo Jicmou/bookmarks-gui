@@ -25,6 +25,9 @@ const MOCK_RESPONSE: IResponse = {
 };
 
 const bookmarkServicetub: IBookmarkService = {
+  addTagToBookmarkTagList: (bookmark: bookmarkTypes.IBookmarkWithTagList) => (
+    tagName: string,
+  ) => MOCK_BOOKMARK_WITH_TAG_LIST,
   createBookmark: (fetch: Fetch) => (apiUrl: string) => (link: string) =>
     Promise.resolve(MOCK_BOOKMARK),
   deleteBookmark: (fetch: Fetch) => (apiUrl: string) => (id: number) =>
