@@ -60,7 +60,7 @@ export const MOCK_BOOKMARK_JSON: types.IBookmarkJSON = {
   duration: 60,
   height: 600,
   id: 1,
-  tagList: ['/v1/tags/1', '/v1/tags/2', '/v1/tags/3', '/v1/tags/4'],
+  tags: ['/v1/tags/1', '/v1/tags/2', '/v1/tags/3', '/v1/tags/4'],
   title: 'bar',
   type: types.EType.VIDEO,
   url: 'http://baz.qux',

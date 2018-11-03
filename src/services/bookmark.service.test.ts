@@ -20,8 +20,16 @@ describe('Bookmark service: ', () => {
     describe('GIVEN a JSON Bookmark, ', () => {
       it('SHOULD return a bookmark', () => {
         expect(testedModule.fromJSONToBookmark(MOCK_BOOKMARK_JSON)).toEqual({
-          ...MOCK_BOOKMARK_JSON,
+          authorName: MOCK_BOOKMARK_JSON.authorName,
           creationDate: new Date(MOCK_BOOKMARK_JSON.creationDate),
+          duration: MOCK_BOOKMARK_JSON.duration,
+          height: MOCK_BOOKMARK_JSON.height,
+          id: MOCK_BOOKMARK_JSON.id,
+          tagList: MOCK_BOOKMARK_JSON.tags,
+          title: MOCK_BOOKMARK_JSON.title,
+          type: MOCK_BOOKMARK_JSON.type,
+          url: MOCK_BOOKMARK_JSON.url,
+          width: MOCK_BOOKMARK_JSON.width,
         });
       });
     });
@@ -158,7 +166,7 @@ describe('Bookmark service: ', () => {
     describe('GIVEN a valid id: ', () => {
       const mockBookmarkJson: IBookmarkJSON = {
         ...MOCK_BOOKMARK_JSON,
-        tagList: ['/v1/tags/1', '/v1/tags/2', '/v1/tags/3', '/v1/tags/4'],
+        tags: ['/v1/tags/1', '/v1/tags/2', '/v1/tags/3', '/v1/tags/4'],
       };
       const mockFetch = injectJsonSuccessResponseToFetch({
         bookmark: mockBookmarkJson,
@@ -178,7 +186,7 @@ describe('Bookmark service: ', () => {
           .then((bookmark: IBookmarkWithTagList) =>
             bookmark.tagList.map((tag, index) =>
               expect(tag.id).toBe(
-                getIdFromEndpoint(mockBookmarkJson.tagList[index]),
+                getIdFromEndpoint(mockBookmarkJson.tags[index]),
               ),
             ),
           );

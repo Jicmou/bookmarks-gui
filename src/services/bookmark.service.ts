@@ -11,7 +11,7 @@ export const fromJSONToBookmark = (
   duration: bookmarkJSON.duration,
   height: bookmarkJSON.height,
   id: bookmarkJSON.id,
-  tagList: bookmarkJSON.tagList,
+  tagList: bookmarkJSON.tags,
   title: bookmarkJSON.title,
   type: bookmarkJSON.type,
   url: bookmarkJSON.url,
