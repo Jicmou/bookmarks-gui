@@ -8,6 +8,7 @@ import { BookmarkDetails } from './bookmark-details';
 export interface IBookmarkDetailsProps {
   bookmark: IBookmarkWithTagList | undefined;
   tagForm: ITagFormProps;
+  onTagRemove: (tagId: number) => () => void;
 }
 
 export const BookmarkPage = (props: IBookmarkDetailsProps) =>
@@ -16,7 +17,10 @@ export const BookmarkPage = (props: IBookmarkDetailsProps) =>
       <Link to="/">Home</Link>
       <h1 className="bookmark-title">{props.bookmark.title}</h1>
       <BookmarkDetails bookmark={props.bookmark} />
-      <TagList tagList={props.bookmark.tagList} />
+      <TagList
+        tagList={props.bookmark.tagList}
+        onTagRemove={props.onTagRemove}
+      />
       <TagForm
         inputValue={props.tagForm.inputValue}
         onFormSubmit={props.tagForm.onFormSubmit}

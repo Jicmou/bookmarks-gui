@@ -79,6 +79,7 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
                       onFormSubmit: this.handleFormSubmit(this.state),
                       onInputChange: this.handleInputChange(),
                     }}
+                    onTagRemove={this.handleTagRemove()}
                   />
                 )}
               />
@@ -161,6 +162,13 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
       this.setState({
         inputValue: event.target.value,
       });
+    };
+  }
+
+  private handleTagRemove() {
+    return (tagId: number) => () => {
+      // tslint:disable-next-line:no-console
+      console.log('TAG id: ', tagId);
     };
   }
 

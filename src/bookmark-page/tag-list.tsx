@@ -5,6 +5,7 @@ import { TagItem } from './tag-item';
 
 export interface ITagListProps {
   tagList: types.TagList;
+  onTagRemove: (tagId: number) => () => void;
 }
 
 export const TagList = (props: ITagListProps) => (
@@ -13,10 +14,7 @@ export const TagList = (props: ITagListProps) => (
       <TagItem
         key={`tag-key-${tag.id}`}
         tag={tag}
-        onTagRemove={(tagId: number) => () => {
-          // tslint:disable-next-line:no-console
-          console.log(tagId);
-        }}
+        onTagRemove={props.onTagRemove}
       />
     ))}
   </ul>
