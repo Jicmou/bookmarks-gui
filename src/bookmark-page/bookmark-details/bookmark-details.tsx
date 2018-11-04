@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { IBookmarkWithTagList } from '../types/bookmark.type';
-import { TagList } from './tag-list';
+import { IBookmarkWithTagList } from '../../types/bookmark.type';
+import { TagList } from './tag-list/tag-list';
 
 export interface IBookmarkDetailsProps {
   bookmark: IBookmarkWithTagList;

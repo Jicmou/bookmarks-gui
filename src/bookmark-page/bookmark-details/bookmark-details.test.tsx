@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { MOCK_BOOKMARK_WITH_TAG_LIST } from '../testing/bookmark.mock';
-import { MOCK_HANDLER } from '../testing/handler.mock';
+import { MOCK_BOOKMARK_WITH_TAG_LIST } from '../../testing/bookmark.mock';
+import { MOCK_HANDLER } from '../../testing/handler.mock';
 
 import { BookmarkDetails, IBookmarkDetailsProps } from './bookmark-details';
 

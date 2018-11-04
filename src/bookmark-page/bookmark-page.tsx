@@ -5,8 +5,8 @@ import Button from '@material-ui/core/Button';
 import { IBookmarkWithTagList } from '../types/bookmark.type';
 import { ERoutePath } from '../types/route-path.enum';
 
-import { BookmarkDetails } from './bookmark-details';
-import { TagForm, ITagFormProps } from './tag-form';
+import { BookmarkDetails } from './bookmark-details/bookmark-details';
+import { TagForm, ITagFormProps } from './tag-form/tag-form';
 
 export interface IBookmarkPageProps extends ITagFormProps {
   bookmark: IBookmarkWithTagList | undefined;

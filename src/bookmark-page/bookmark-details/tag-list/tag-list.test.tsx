@@ -1,15 +1,15 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { MOCK_HANDLER } from '../testing/handler.mock';
-import { MOCK_TAG } from '../testing/tag.mock';
+import { MOCK_HANDLER } from '../../../testing/handler.mock';
+import { MOCK_TAG_LIST } from '../../../testing/tag.mock';
 
-import { TagItem } from './tag-item';
+import { TagList } from './tag-list';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
-    <TagItem onTagRemove={() => MOCK_HANDLER} tag={MOCK_TAG} />,
+    <TagList tagList={MOCK_TAG_LIST} onTagRemove={() => MOCK_HANDLER} />,
     div,
   );
   ReactDOM.unmountComponentAtNode(div);

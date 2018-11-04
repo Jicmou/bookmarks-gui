@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import * as types from '../types/tag.type';
-import { TagItem } from './tag-item';
+import * as types from '../../../types/tag.type';
+import { TagItem } from './tag-item/tag-item';
 
 export interface ITagListProps {
   tagList: types.TagList;
