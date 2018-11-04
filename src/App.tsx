@@ -58,6 +58,16 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
     );
   }
 
+  private addTagToBookmarkTagList(tag: string) {
+    if (this.state.currentBookmark) {
+      this.setState({
+        currentBookmark: this.props.bookmarkService.addTagToBookmarkTagList(
+          this.state.currentBookmark,
+        )(tag),
+      });
+    }
+  }
+
   private closeModal() {
     this.setState({
       modal: {
@@ -67,18 +77,17 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
     });
   }
 
-  private createBookmark(event: Event) {
-    return (link: string) =>
-      this.props.bookmarkService
-        .createBookmark(this.props.fetch)(this.state.apiUrl)(link)
-        .then(bookmark => {
-          this.setState({
-            bookmarkList: [...this.state.bookmarkList, bookmark],
-          });
-        })
-        .catch((errorMessage: IServerErrorMessage) => {
-          this.displayModal(errorMessage.message);
+  private createBookmark(link: string) {
+    return this.props.bookmarkService
+      .createBookmark(this.props.fetch)(this.state.apiUrl)(link)
+      .then(bookmark => {
+        this.setState({
+          bookmarkList: [...this.state.bookmarkList, bookmark],
         });
+      })
+      .catch((errorMessage: IServerErrorMessage) => {
+        this.displayModal(errorMessage.message);
+      });
   }
 
   private deleteBookmark(bookmarkId: number) {
@@ -153,10 +162,8 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
 
   private handleFormSubmit() {
     return (link: string) => (event: Event) => {
-      // tslint:disable-next-line:no-console
-      console.log('Sending link: ', link);
       event.preventDefault();
-      this.createBookmark(event)(link);
+      this.createBookmark(link);
     };
   }
 
@@ -169,13 +176,7 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
   private handleTagFormSubmit() {
     return (tag: string) => (event: Event) => {
       event.preventDefault();
-      if (this.state.currentBookmark) {
-        this.setState({
-          currentBookmark: this.props.bookmarkService.addTagToBookmarkTagList(
-            this.state.currentBookmark,
-          )(tag),
-        });
-      }
+      this.addTagToBookmarkTagList(tag);
     };
   }
 
