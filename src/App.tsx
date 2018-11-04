@@ -145,13 +145,26 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
 
   private handleModalClose() {
     return () => {
-      this.setState({
-        modal: {
-          message: '',
-          open: false,
-        },
-      });
+      this.closeModal();
     };
+  }
+
+  private closeModal() {
+    this.setState({
+      modal: {
+        message: '',
+        open: false,
+      },
+    });
+  }
+
+  private displayModal(message: string) {
+    this.setState({
+      modal: {
+        message,
+        open: true,
+      },
+    });
   }
 
   private createBookmark(event: Event) {
@@ -164,12 +177,7 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
           });
         })
         .catch((errorMessage: IServerErrorMessage) => {
-          this.setState({
-            modal: {
-              message: errorMessage.message,
-              open: true,
-            },
-          });
+          this.displayModal(errorMessage.message);
         });
   }
 
@@ -229,9 +237,10 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
       .updateBookmark(this.props.fetch)(this.state.apiUrl)(bookmark.id)(
         bookmark.tagList.map(tag => tag.name),
       )
-      .then(updatedBookmark =>
-        this.setState({ currentBookmark: updatedBookmark }),
-      );
+      .then(updatedBookmark => {
+        this.setState({ currentBookmark: updatedBookmark });
+        this.displayModal(`${updatedBookmark.title} succesfully updated`);
+      });
   }
 }
 
