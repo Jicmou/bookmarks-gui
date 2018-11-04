@@ -1,3 +1,4 @@
+import { TagList } from '../types/tag.type';
 export enum EType {
   PHOTO = 'photo',
   VIDEO = 'video',
@@ -9,6 +10,7 @@ export interface IBookmark {
   duration: number | null;
   height: number;
   id: number;
+  tagList: string[];
   title: string;
   type: EType;
   url: string;
@@ -23,6 +25,20 @@ export interface IBookmarkJSON {
   duration: number | null;
   height: number;
   id: number;
+  tags: string[];
+  title: string;
+  type: EType;
+  url: string;
+  width: number;
+}
+
+export interface IBookmarkWithTagList {
+  authorName: string;
+  creationDate: Date;
+  duration: number | null;
+  height: number;
+  id: number;
+  tagList: TagList;
   title: string;
   type: EType;
   url: string;
@@ -35,6 +51,6 @@ export interface IGetBookmarkListResponse {
   bookmarkList: TBookmarkJSONList;
 }
 
-export interface ICreateBookmarkResponse {
+export interface IBookmarkResponse {
   bookmark: IBookmarkJSON;
 }

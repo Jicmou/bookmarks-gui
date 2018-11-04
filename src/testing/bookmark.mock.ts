@@ -1,3 +1,4 @@
+import { MOCK_TAG_LIST } from './tag.mock';
 import * as types from '../bookmark-table/bookmark.type';
 
 export const MOCK_BOOKMARK: types.IBookmark = {
@@ -6,6 +7,7 @@ export const MOCK_BOOKMARK: types.IBookmark = {
   duration: 60,
   height: 600,
   id: 1,
+  tagList: ['/v1/tags/1', '/v1/tags/2', '/v1/tags/3', '/v1/tags/4'],
   title: 'bar',
   type: types.EType.VIDEO,
   url: 'http://baz.qux',
@@ -58,6 +60,7 @@ export const MOCK_BOOKMARK_JSON: types.IBookmarkJSON = {
   duration: 60,
   height: 600,
   id: 1,
+  tags: ['/v1/tags/1', '/v1/tags/2', '/v1/tags/3', '/v1/tags/4'],
   title: 'bar',
   type: types.EType.VIDEO,
   url: 'http://baz.qux',
@@ -104,10 +107,23 @@ export const MOCK_BOOKMARK_JSON_LIST: types.TBookmarkJSONList = [
   },
 ];
 
+export const MOCK_BOOKMARK_WITH_TAG_LIST: types.IBookmarkWithTagList = {
+  authorName: 'foo',
+  creationDate: new Date(2018, 11, 16),
+  duration: 60,
+  height: 600,
+  id: 1,
+  tagList: MOCK_TAG_LIST,
+  title: 'bar',
+  type: types.EType.VIDEO,
+  url: 'http://baz.qux',
+  width: 800,
+};
+
 export const MOCK_GET_BOOKMARK_LIST_RESPONSE_BODY: types.IGetBookmarkListResponse = {
   bookmarkList: MOCK_BOOKMARK_JSON_LIST,
 };
 
-export const MOCK_CREATE_BOOKMARK_RESPONSE_BODY: types.ICreateBookmarkResponse = {
+export const MOCK_BOOKMARK_RESPONSE_BODY: types.IBookmarkResponse = {
   bookmark: MOCK_BOOKMARK_JSON,
 };

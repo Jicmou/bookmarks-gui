@@ -17,6 +17,7 @@ export interface IBookmarkTableProps {
   ) => void;
   onChangeRowsPerPage: (event: ITargetValueEvent) => void;
   onDelete: (bookmarkId: number) => () => void;
+  onEdit: (bookmarkId: number) => () => void;
   table: ITableState;
 }
 
@@ -27,6 +28,7 @@ export const BookmarkTable = (props: IBookmarkTableProps) => (
       <BookmarkTableBody
         bookmarkList={props.table.paginatedBookmarkList}
         onDelete={props.onDelete}
+        onEdit={props.onEdit}
       />
     </Table>
     <TablePagination

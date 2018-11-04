@@ -5,26 +5,25 @@ import TextField from '@material-ui/core/TextField';
 
 import { IPreventEvent, ITargetValueEvent } from '../App.type';
 
-interface IBookmarkFormProps {
+export interface ITagFormProps {
   inputValue: string;
   onInputChange: (event: ITargetValueEvent) => void;
   onFormSubmit: (event: IPreventEvent) => void;
 }
 
-export const BookmarkForm = (props: IBookmarkFormProps) => (
-  <form className="bookmark-form" onSubmit={props.onFormSubmit}>
+export const TagForm = (props: ITagFormProps) => (
+  <form className="tag-form" onSubmit={props.onFormSubmit}>
     <TextField
-      autoFocus={true}
-      className="bookmark-form-input"
+      className="tag-form-input"
       id="outlined-name"
-      label="Link"
+      label="Tag"
       margin="normal"
       onChange={props.onInputChange}
       value={props.inputValue}
       variant="outlined"
     />
     <Button
-      className="bookmark-form-button"
+      className="tag-form-button"
       color="primary"
       type="submit"
       variant="contained"
