@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { IBookmarkWithTagList } from '../bookmark-table/bookmark.type';
+import { TagList } from './tag-list';
 
 export interface IBookmarkDetailsProps {
   bookmark: IBookmarkWithTagList;
+  onTagRemove: (tagId: number) => () => void;
 }
 
 export const BookmarkDetails = (props: IBookmarkDetailsProps) => (
@@ -27,6 +29,12 @@ export const BookmarkDetails = (props: IBookmarkDetailsProps) => (
     </li>
     <li>
       <span>width: {props.bookmark.width}</span>
+    </li>
+    <li>
+      <TagList
+        tagList={props.bookmark.tagList}
+        onTagRemove={props.onTagRemove}
+      />
     </li>
   </ul>
 );
