@@ -1,34 +1,17 @@
 import * as React from 'react';
 
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-
-import { IPreventEvent, ITargetValueEvent } from '../App.type';
+import { IPreventEvent } from '../App.type';
+import { AppForm } from '../widgets/app-form/app-form';
 
 export interface ITagFormProps {
-  inputValue: string;
-  onInputChange: (event: ITargetValueEvent) => void;
-  onFormSubmit: (event: IPreventEvent) => void;
+  onTagFormSubmit: (tag: string) => (event: IPreventEvent) => void;
 }
 
 export const TagForm = (props: ITagFormProps) => (
-  <form className="tag-form" onSubmit={props.onFormSubmit}>
-    <TextField
-      className="tag-form-input"
-      id="outlined-name"
-      label="Tag"
-      margin="normal"
-      onChange={props.onInputChange}
-      value={props.inputValue}
-      variant="outlined"
-    />
-    <Button
-      className="tag-form-button"
-      color="primary"
-      type="submit"
-      variant="contained"
-    >
-      Add
-    </Button>
-  </form>
+  <AppForm
+    buttonName="Add"
+    formId="tag-form"
+    inputLabel="tag"
+    onAppFormSubmit={props.onTagFormSubmit}
+  />
 );

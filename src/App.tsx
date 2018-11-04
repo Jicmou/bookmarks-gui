@@ -125,13 +125,13 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
   }
 
   private handleTagFormSubmit() {
-    return (inputValue: string) => (event: Event) => {
+    return (tag: string) => (event: Event) => {
       event.preventDefault();
       if (this.state.currentBookmark) {
         this.setState({
           currentBookmark: this.props.bookmarkService.addTagToBookmarkTagList(
             this.state.currentBookmark,
-          )(inputValue),
+          )(tag),
         });
       }
     };
