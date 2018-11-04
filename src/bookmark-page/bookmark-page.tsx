@@ -2,9 +2,10 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-import { BookmarkDetails } from './bookmark-details';
 import { IBookmarkWithTagList } from '../bookmark-table/bookmark.type';
+import { ERoutePath } from '../types/route-path.enum';
 
+import { BookmarkDetails } from './bookmark-details';
 import { TagForm, ITagFormProps } from './tag-form';
 
 export interface IBookmarkPageProps extends ITagFormProps {
@@ -16,7 +17,7 @@ export interface IBookmarkPageProps extends ITagFormProps {
 export const BookmarkPage = (props: IBookmarkPageProps) =>
   props.bookmark ? (
     <div className="bookmark-body">
-      <Link to="/">Home</Link>
+      <Link to={ERoutePath.HOME_PAGE}>Home</Link>
       <h1 className="bookmark-title">{props.bookmark.title}</h1>
       <BookmarkDetails
         bookmark={props.bookmark}

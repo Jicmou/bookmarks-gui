@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+import { ERoutePath } from './types/route-path.enum';
+
 import { HomePage, HomePageProps } from './home-page/home-page';
 import {
   BookmarkPage,
@@ -14,7 +16,7 @@ export const Main = (props: MainProps) => (
     <Router>
       <div className="routes">
         <Route
-          path="/"
+          path={ERoutePath.HOME_PAGE}
           exact={true}
           component={() => (
             <HomePage
@@ -28,7 +30,7 @@ export const Main = (props: MainProps) => (
           )}
         />
         <Route
-          path="/bookmark/:bookmarkId"
+          path={ERoutePath.BOOKMARK_PAGE}
           component={() => (
             <BookmarkPage
               bookmark={props.bookmark}
