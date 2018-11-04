@@ -1,4 +1,4 @@
-import { EColumns } from '../home-page/bookmark-table/columnList';
+import { EColumns } from '../main/home-page/bookmark-table/columnList';
 import { MOCK_BOOKMARK_LIST } from './bookmark.mock';
 import { ITableState, ERowsPerPAge } from '../App.type';
 
