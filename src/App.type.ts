@@ -1,4 +1,4 @@
-import { ColumnList } from './bookmark-table/columnList';
+import { ColumnList } from './home-page/bookmark-table/columnList';
 import { Fetch } from './types/fetch.type';
 import { IBookmarkService } from './services/bookmark.service.type';
 import { TBookmarkList, IBookmarkWithTagList } from './types/bookmark.type';

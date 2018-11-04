@@ -1,4 +1,4 @@
-import { columnList } from './bookmark-table/columnList';
+import { columnList } from './home-page/bookmark-table/columnList';
 import * as types from './App.type';
 
 const API_URL = 'http://localhost:8000';

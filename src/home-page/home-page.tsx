@@ -7,7 +7,7 @@ import {
 import {
   BookmarkTable,
   IBookmarkTableProps,
-} from '../bookmark-table/bookmark-table';
+} from './bookmark-table/bookmark-table';
 
 export type HomePageProps = IBookmarkFormProps & IBookmarkTableProps;
 

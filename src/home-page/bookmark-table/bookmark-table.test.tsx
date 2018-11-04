@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { MOCK_HANDLER } from '../testing/handler.mock';
-import { MOCK_TABLE } from '../testing/table.mock';
+import { MOCK_HANDLER } from '../../testing/handler.mock';
+import { MOCK_TABLE } from '../../testing/table.mock';
 
 import { BookmarkTable, IBookmarkTableProps } from './bookmark-table';
 

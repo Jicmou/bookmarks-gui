@@ -8,7 +8,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import { BookmarkTableHeader } from './bookmark-table-header';
 import { BookmarkTableBody } from './bookmark-table-body';
 
-import { ITargetValueEvent, ITableState } from '../App.type';
+import { ITargetValueEvent, ITableState } from '../../App.type';
 
 export interface IBookmarkTableProps {
   onChangePage: (

@@ -2,8 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import { MOCK_BOOKMARK_LIST } from '../testing/bookmark.mock';
-import { MOCK_HANDLER } from '../testing/handler.mock';
+import { MOCK_BOOKMARK_LIST } from '../../testing/bookmark.mock';
+import { MOCK_HANDLER } from '../../testing/handler.mock';
 
 import {
   BookmarkTableBody,
