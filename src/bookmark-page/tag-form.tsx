@@ -14,7 +14,6 @@ export interface ITagFormProps {
 export const TagForm = (props: ITagFormProps) => (
   <form className="tag-form" onSubmit={props.onFormSubmit}>
     <TextField
-      autoFocus={true}
       className="tag-form-input"
       id="outlined-name"
       label="Tag"

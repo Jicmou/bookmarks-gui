@@ -55,11 +55,7 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
                 component={() => (
                   <BookmarkPage
                     bookmark={this.state.currentBookmark}
-                    tagForm={{
-                      inputValue: this.state.tagForm.inputValue,
-                      onFormSubmit: this.handleTagFormSubmit(this.state),
-                      onInputChange: this.handleTagFormInputChange(),
-                    }}
+                    onFormSubmit={this.handleTagFormSubmit()}
                     onTagRemove={this.handleTagRemove()}
                   />
                 )}
@@ -138,17 +134,14 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
     };
   }
 
-  private handleTagFormSubmit(state: types.IAppState) {
-    return (event: Event) => {
+  private handleTagFormSubmit() {
+    return (inputValue: string) => (event: Event) => {
       event.preventDefault();
-      if (state.currentBookmark) {
+      if (this.state.currentBookmark) {
         this.setState({
           currentBookmark: this.props.bookmarkService.addTagToBookmarkTagList(
-            state.currentBookmark,
-          )(state.tagForm.inputValue),
-          tagForm: {
-            inputValue: '',
-          },
+            this.state.currentBookmark,
+          )(inputValue),
         });
       }
     };
@@ -158,14 +151,6 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
     return (event: types.ITargetValueEvent) => {
       this.setState({
         inputValue: event.target.value,
-      });
-    };
-  }
-
-  private handleTagFormInputChange() {
-    return (event: types.ITargetValueEvent) => {
-      this.setState({
-        tagForm: { inputValue: event.target.value },
       });
     };
   }

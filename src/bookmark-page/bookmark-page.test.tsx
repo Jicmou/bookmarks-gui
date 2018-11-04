@@ -8,12 +8,8 @@ import { MOCK_HANDLER } from '../testing/handler.mock';
 
 const mockProps: IBookmarkDetailsProps = {
   bookmark: MOCK_BOOKMARK_WITH_TAG_LIST,
+  onFormSubmit: () => MOCK_HANDLER,
   onTagRemove: () => MOCK_HANDLER,
-  tagForm: {
-    inputValue: '',
-    onFormSubmit: MOCK_HANDLER,
-    onInputChange: MOCK_HANDLER,
-  },
 };
 
 it('renders without crashing', () => {
@@ -22,7 +18,7 @@ it('renders without crashing', () => {
     <Router>
       <BookmarkPage
         bookmark={mockProps.bookmark}
-        tagForm={mockProps.tagForm}
+        onFormSubmit={mockProps.onFormSubmit}
         onTagRemove={mockProps.onTagRemove}
       />
     </Router>,
