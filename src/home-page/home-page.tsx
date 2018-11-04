@@ -3,7 +3,7 @@ import * as React from 'react';
 import {
   BookmarkForm,
   IBookmarkFormProps,
-} from '../bookmark-form/bookmark-form';
+} from './bookmark-form/bookmark-form';
 import {
   BookmarkTable,
   IBookmarkTableProps,
