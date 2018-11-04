@@ -8,11 +8,11 @@ import { TagList } from './tag-list';
 import { BookmarkDetails } from './bookmark-details';
 import { ITargetValueEvent, IPreventEvent } from '../App.type';
 
-export interface IBookmarkDetailsProps {
+export interface IBookmarkPageProps {
   bookmark: IBookmarkWithTagList | undefined;
   onBookmarkSave: () => void;
   onTagRemove: (tagId: number) => () => void;
-  onFormSubmit: (inputValue: string) => (event: IPreventEvent) => void;
+  onTagFormSubmit: (inputValue: string) => (event: IPreventEvent) => void;
 }
 
 export interface IBookmarkPageState {
@@ -22,10 +22,10 @@ export interface IBookmarkPageState {
 }
 
 export class BookmarkPage extends React.Component<
-  IBookmarkDetailsProps,
+  IBookmarkPageProps,
   IBookmarkPageState
 > {
-  constructor(props: IBookmarkDetailsProps) {
+  constructor(props: IBookmarkPageProps) {
     super(props);
     this.state = {
       tagForm: {
@@ -46,7 +46,9 @@ export class BookmarkPage extends React.Component<
         />
         <TagForm
           inputValue={this.state.tagForm.inputValue}
-          onFormSubmit={this.props.onFormSubmit(this.state.tagForm.inputValue)}
+          onFormSubmit={this.props.onTagFormSubmit(
+            this.state.tagForm.inputValue,
+          )}
           onInputChange={this.handleTagFormInputChange()}
         />
         <Button

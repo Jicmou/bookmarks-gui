@@ -1,10 +1,7 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-
 import Modal from '@material-ui/core/Modal';
 
-import { HomePage } from './home-page/home-page';
-import { BookmarkPage } from './bookmark-page/bookmark-page';
+import { Main } from './main';
 import { IServerErrorMessage } from './services/bookmark.service.type';
 import {
   TBookmarkList,
@@ -34,37 +31,18 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Bookmark Manager</h1>
         </header>
-        <div className="main">
-          <Router>
-            <div className="routes">
-              <Route
-                path="/"
-                exact={true}
-                component={() => (
-                  <HomePage
-                    onChangePage={this.handleChangePage()}
-                    onChangeRowsPerPage={this.handleChangeRowsPerPage()}
-                    onDelete={this.handleDelete()}
-                    onEdit={this.handleEdit()}
-                    onFormSubmit={this.handleFormSubmit()}
-                    table={this.state.table}
-                  />
-                )}
-              />
-              <Route
-                path="/bookmark/:bookmarkId"
-                component={() => (
-                  <BookmarkPage
-                    bookmark={this.state.currentBookmark}
-                    onBookmarkSave={this.handleBookmarkSave()}
-                    onFormSubmit={this.handleTagFormSubmit()}
-                    onTagRemove={this.handleTagRemove()}
-                  />
-                )}
-              />
-            </div>
-          </Router>
-        </div>
+        <Main
+          bookmark={this.state.currentBookmark}
+          onBookmarkFormSubmit={this.handleFormSubmit()}
+          onBookmarkSave={this.handleBookmarkSave()}
+          onChangePage={this.handleChangePage()}
+          onChangeRowsPerPage={this.handleChangeRowsPerPage()}
+          onDelete={this.handleDelete()}
+          onEdit={this.handleEdit()}
+          onTagFormSubmit={this.handleTagFormSubmit()}
+          onTagRemove={this.handleTagRemove()}
+          table={this.state.table}
+        />
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
@@ -139,6 +117,8 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
 
   private handleFormSubmit() {
     return (link: string) => (event: Event) => {
+      // tslint:disable-next-line:no-console
+      console.log('Sending link: ', link);
       event.preventDefault();
       this.createBookmark(event)(link);
     };

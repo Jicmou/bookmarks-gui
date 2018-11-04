@@ -11,11 +11,11 @@ const mockCurriedHandler = () => MOCK_HANDLER;
 const renderMain = (container: HTMLElement) => {
   ReactDOM.render(
     <HomePage
+      onBookmarkFormSubmit={() => MOCK_HANDLER}
       onChangePage={MOCK_HANDLER}
       onChangeRowsPerPage={MOCK_HANDLER}
       onDelete={mockCurriedHandler}
       onEdit={mockCurriedHandler}
-      onFormSubmit={() => MOCK_HANDLER}
       table={MOCK_TABLE}
     />,
     container,

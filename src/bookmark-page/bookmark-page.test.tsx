@@ -2,14 +2,14 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import { BookmarkPage, IBookmarkDetailsProps } from './bookmark-page';
+import { BookmarkPage, IBookmarkPageProps } from './bookmark-page';
 import { MOCK_BOOKMARK_WITH_TAG_LIST } from '../testing/bookmark.mock';
 import { MOCK_HANDLER } from '../testing/handler.mock';
 
-const mockProps: IBookmarkDetailsProps = {
+const mockProps: IBookmarkPageProps = {
   bookmark: MOCK_BOOKMARK_WITH_TAG_LIST,
   onBookmarkSave: MOCK_HANDLER,
-  onFormSubmit: () => MOCK_HANDLER,
+  onTagFormSubmit: () => MOCK_HANDLER,
   onTagRemove: () => MOCK_HANDLER,
 };
 
@@ -20,7 +20,7 @@ it('renders without crashing', () => {
       <BookmarkPage
         bookmark={mockProps.bookmark}
         onBookmarkSave={mockProps.onBookmarkSave}
-        onFormSubmit={mockProps.onFormSubmit}
+        onTagFormSubmit={mockProps.onTagFormSubmit}
         onTagRemove={mockProps.onTagRemove}
       />
     </Router>,
