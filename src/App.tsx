@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Modal from '@material-ui/core/Modal';
 
-import { Main } from './main';
+import { HomePage } from './home-page/home-page';
 import { BookmarkPage } from './bookmark-page/bookmark-page';
 import { IServerErrorMessage } from './services/bookmark.service.type';
 import {
@@ -41,14 +41,12 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
                 path="/"
                 exact={true}
                 component={() => (
-                  <Main
-                    inputValue={this.state.inputValue}
+                  <HomePage
                     onChangePage={this.handleChangePage()}
                     onChangeRowsPerPage={this.handleChangeRowsPerPage()}
                     onDelete={this.handleDelete()}
                     onEdit={this.handleEdit()}
-                    onFormSubmit={this.handleFormSubmit(this.state)}
-                    onInputChange={this.handleInputChange()}
+                    onFormSubmit={this.handleFormSubmit()}
                     table={this.state.table}
                   />
                 )}
@@ -139,10 +137,10 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
     return (bookmarkId: number) => () => this.editBookmark(bookmarkId);
   }
 
-  private handleFormSubmit(state: types.IAppState) {
-    return (event: Event) => {
+  private handleFormSubmit() {
+    return (link: string) => (event: Event) => {
       event.preventDefault();
-      this.createBookmark(event)(state.inputValue);
+      this.createBookmark(event)(link);
     };
   }
 
@@ -156,14 +154,6 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
           )(inputValue),
         });
       }
-    };
-  }
-
-  private handleInputChange() {
-    return (event: types.ITargetValueEvent) => {
-      this.setState({
-        inputValue: event.target.value,
-      });
     };
   }
 
@@ -191,7 +181,6 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
         .then(bookmark => {
           this.setState({
             bookmarkList: [...this.state.bookmarkList, bookmark],
-            inputValue: '',
           });
         })
         .catch((errorMessage: IServerErrorMessage) => {
