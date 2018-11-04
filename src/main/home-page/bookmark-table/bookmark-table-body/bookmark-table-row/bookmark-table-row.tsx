@@ -23,6 +23,7 @@ export const BookmarkTableRow = (props: IBookmarkTableRowProps) => (
     <TableCell>
       <Link to={`/bookmark/${props.bookmark.id}`}>
         <Create
+          className="clickable"
           id={`edit-bookmark-${props.bookmark.id}`}
           onClick={props.onEdit(props.bookmark.id)}
         />
@@ -30,6 +31,7 @@ export const BookmarkTableRow = (props: IBookmarkTableRowProps) => (
     </TableCell>
     <TableCell>
       <DeleteForeverIcon
+        className="clickable"
         id={`delete-bookmark-${props.bookmark.id}`}
         onClick={props.onDelete(props.bookmark.id)}
       />

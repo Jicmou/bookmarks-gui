@@ -12,6 +12,7 @@ export const TagItem = (props: ITagItemProps) => (
   <li id={`tag-${props.tag.name}`}>
     <span>{props.tag.name}</span>
     <DeleteForeverIcon
+      className="clickable"
       id={`delete-bookmark-${props.tag.id}`}
       onClick={props.onTagRemove(props.tag.id)}
     />
