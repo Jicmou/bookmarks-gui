@@ -1,15 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { MOCK_HANDLER } from '../testing/handler.mock';
+import logo from '../../logo.svg';
 
-import { BookmarkForm } from './bookmark-form';
+import { AppHeader } from './app-header';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(
-    <BookmarkForm onBookmarkFormSubmit={() => MOCK_HANDLER} />,
-    div,
-  );
+  ReactDOM.render(<AppHeader logo={logo} title="bar" />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

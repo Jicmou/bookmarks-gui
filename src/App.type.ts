@@ -34,9 +34,9 @@ export interface IAppState {
   apiUrl: string;
   bookmarkList: TBookmarkList;
   currentBookmark: IBookmarkWithTagList | undefined;
-  inputValue: string;
   modal: IModalState;
   table: ITableState;
+  title: string;
 }
 
 export interface ITargetValueEvent {

@@ -3,6 +3,8 @@ import * as types from './App.type';
 
 const API_URL = 'http://localhost:8000';
 
+const APP_TITLE = 'Bookmark Manager';
+
 const MODAL_INIT_VALUE: types.IModalState = {
   message: '',
   open: false,
@@ -20,7 +22,7 @@ export const INITIAL_STATE: types.IAppState = {
   apiUrl: API_URL,
   bookmarkList: [],
   currentBookmark: undefined,
-  inputValue: '',
   modal: MODAL_INIT_VALUE,
   table: TABLE_INIT_VALUE,
+  title: APP_TITLE,
 };

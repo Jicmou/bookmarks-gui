@@ -1,14 +1,14 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { MOCK_HANDLER } from '../testing/handler.mock';
+import { MOCK_HANDLER } from '../../testing/handler.mock';
 
-import { BookmarkForm } from './bookmark-form';
+import { AppModal } from './app-modal';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
-    <BookmarkForm onBookmarkFormSubmit={() => MOCK_HANDLER} />,
+    <AppModal message="foo" onAppModalClose={MOCK_HANDLER} open={true} />,
     div,
   );
   ReactDOM.unmountComponentAtNode(div);
