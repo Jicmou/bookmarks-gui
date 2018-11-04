@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Main } from './main';
+import { Main } from './main/main';
 import { AppHeader } from './widgets/app-header/app-header';
 import { AppModal } from './widgets/app-modal/app-modal';
 
