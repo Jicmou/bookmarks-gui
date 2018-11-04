@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import App from './App';
-import * as bookmarkTypes from './bookmark-table/bookmark.type';
+import * as bookmarkTypes from './types/bookmark.type';
 import { Fetch } from './types/fetch.type';
 import { FETCH_STUB_SUCCESS } from './testing/fetch.stub';
 import { IBookmarkService } from './services/bookmark.service.type';

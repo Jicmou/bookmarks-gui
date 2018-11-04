@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-import { IBookmarkWithTagList } from '../bookmark-table/bookmark.type';
+import { IBookmarkWithTagList } from '../types/bookmark.type';
 import { ERoutePath } from '../types/route-path.enum';
 
 import { BookmarkDetails } from './bookmark-details';

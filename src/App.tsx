@@ -5,10 +5,7 @@ import { AppHeader } from './widgets/app-header/app-header';
 import { AppModal } from './widgets/app-modal/app-modal';
 
 import { IServerErrorMessage } from './services/bookmark.service.type';
-import {
-  TBookmarkList,
-  IBookmarkWithTagList,
-} from './bookmark-table/bookmark.type';
+import { TBookmarkList, IBookmarkWithTagList } from './types/bookmark.type';
 
 import * as types from './App.type';
 import { INITIAL_STATE } from './App.init';

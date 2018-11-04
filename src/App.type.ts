@@ -1,10 +1,7 @@
 import { ColumnList } from './bookmark-table/columnList';
 import { Fetch } from './types/fetch.type';
 import { IBookmarkService } from './services/bookmark.service.type';
-import {
-  TBookmarkList,
-  IBookmarkWithTagList,
-} from './bookmark-table/bookmark.type';
+import { TBookmarkList, IBookmarkWithTagList } from './types/bookmark.type';
 
 export interface IAppProps {
   fetch: Fetch;

@@ -1,5 +1,5 @@
 import { MOCK_TAG_LIST } from './tag.mock';
-import * as types from '../bookmark-table/bookmark.type';
+import * as types from '../types/bookmark.type';
 
 export const MOCK_BOOKMARK: types.IBookmark = {
   authorName: 'foo',

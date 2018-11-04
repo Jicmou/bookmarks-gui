@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IBookmarkWithTagList } from '../bookmark-table/bookmark.type';
+import { IBookmarkWithTagList } from '../types/bookmark.type';
 import { TagList } from './tag-list';
 
 export interface IBookmarkDetailsProps {

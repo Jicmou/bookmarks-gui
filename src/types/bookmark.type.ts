@@ -1,4 +1,4 @@
-import { TagList } from '../types/tag.type';
+import { TagList } from './tag.type';
 export enum EType {
   PHOTO = 'photo',
   VIDEO = 'video',

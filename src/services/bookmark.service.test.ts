@@ -4,7 +4,7 @@ import {
   IBookmarkWithTagList,
   IBookmarkJSON,
   IBookmarkResponse,
-} from '../bookmark-table/bookmark.type';
+} from '../types/bookmark.type';
 import {
   MOCK_BOOKMARK,
   MOCK_BOOKMARK_JSON,
