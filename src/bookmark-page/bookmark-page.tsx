@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+
 import { IBookmarkWithTagList } from '../bookmark-table/bookmark.type';
 import { TagForm } from './tag-form';
 import { TagList } from './tag-list';
@@ -8,6 +10,7 @@ import { ITargetValueEvent, IPreventEvent } from '../App.type';
 
 export interface IBookmarkDetailsProps {
   bookmark: IBookmarkWithTagList | undefined;
+  onBookmarkSave: () => void;
   onTagRemove: (tagId: number) => () => void;
   onFormSubmit: (inputValue: string) => (event: IPreventEvent) => void;
 }
@@ -46,6 +49,15 @@ export class BookmarkPage extends React.Component<
           onFormSubmit={this.props.onFormSubmit(this.state.tagForm.inputValue)}
           onInputChange={this.handleTagFormInputChange()}
         />
+        <Button
+          className="save-bookmark-button"
+          color="primary"
+          type="button"
+          variant="contained"
+          onClick={this.props.onBookmarkSave}
+        >
+          Save Bookmark
+        </Button>
       </div>
     ) : (
       <div className="no-bookmark">Loading, please wait...</div>

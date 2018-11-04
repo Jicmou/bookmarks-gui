@@ -118,3 +118,31 @@ export const addTagToBookmarkTagList = (
     },
   ],
 });
+
+export const updateBookmark = (fetch: Fetch) => (apiUrl: string) => (
+  id: number,
+) => (tagNameList: string[]) =>
+  fetch(`${apiUrl}/v1/bookmarks/${id.toString()}`, {
+    body: JSON.stringify({
+      tagNameList,
+    }),
+    method: EMethod.PUT,
+    redirect: ERedirect.FOLLOW,
+  })
+    .then(response => response.json())
+    .then(
+      body =>
+        !body || body.code
+          ? Promise.reject(body as types.IServerErrorMessage)
+          : Promise.resolve((body as bookmarkTypes.IBookmarkResponse).bookmark),
+    )
+    .then(fromJSONToBookmark)
+    .then(bookmark =>
+      getTagListFromEndpointList(fetch)(apiUrl)(bookmark.tagList).then(
+        tagList =>
+          ({
+            ...bookmark,
+            tagList,
+          } as bookmarkTypes.IBookmarkWithTagList),
+      ),
+    );

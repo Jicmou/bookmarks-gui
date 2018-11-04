@@ -6,6 +6,7 @@ export enum EMethod {
   GET = 'GET',
   DELETE = 'DELETE',
   POST = 'POST',
+  PUT = 'PUT',
 }
 
 export interface IRequestOptions {

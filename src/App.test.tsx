@@ -45,6 +45,9 @@ const bookmarkServicetub: IBookmarkService = {
   removeTagFromBookmarkById: (bookmark: bookmarkTypes.IBookmarkWithTagList) => (
     tagId: number,
   ) => MOCK_BOOKMARK_WITH_TAG_LIST,
+  updateBookmark: (fetch: Fetch) => (apiUrl: string) => (id: number) => (
+    tagNameList: string[],
+  ) => Promise.resolve(MOCK_BOOKMARK_WITH_TAG_LIST),
 };
 
 it('renders without crashing', () => {

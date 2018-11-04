@@ -8,6 +8,7 @@ import { MOCK_HANDLER } from '../testing/handler.mock';
 
 const mockProps: IBookmarkDetailsProps = {
   bookmark: MOCK_BOOKMARK_WITH_TAG_LIST,
+  onBookmarkSave: MOCK_HANDLER,
   onFormSubmit: () => MOCK_HANDLER,
   onTagRemove: () => MOCK_HANDLER,
 };
@@ -18,6 +19,7 @@ it('renders without crashing', () => {
     <Router>
       <BookmarkPage
         bookmark={mockProps.bookmark}
+        onBookmarkSave={mockProps.onBookmarkSave}
         onFormSubmit={mockProps.onFormSubmit}
         onTagRemove={mockProps.onTagRemove}
       />

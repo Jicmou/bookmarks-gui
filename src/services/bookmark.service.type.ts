@@ -28,6 +28,13 @@ export interface IBookmarkService {
   removeTagFromBookmarkById: (
     bookmark: bookmarkTypes.IBookmarkWithTagList,
   ) => (tagId: number) => bookmarkTypes.IBookmarkWithTagList;
+  updateBookmark: (
+    fetch: Fetch,
+  ) => (
+    apiUrl: string,
+  ) => (
+    id: number,
+  ) => (tagNameList: string[]) => Promise<bookmarkTypes.IBookmarkWithTagList>;
 }
 
 export interface IServerErrorMessage {

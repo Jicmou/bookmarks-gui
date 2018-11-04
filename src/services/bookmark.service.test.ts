@@ -3,6 +3,7 @@ import { MOCK_BOOKMARK_WITH_TAG_LIST } from './../testing/bookmark.mock';
 import {
   IBookmarkWithTagList,
   IBookmarkJSON,
+  IBookmarkResponse,
 } from '../bookmark-table/bookmark.type';
 import {
   MOCK_BOOKMARK,
@@ -16,6 +17,14 @@ import {
 } from '../testing/fetch.stub';
 
 import * as testedModule from './bookmark.service';
+
+const getIdFromEndpoint = (endpoint: string) =>
+  parseInt(
+    endpoint
+      .split('/')
+      .find((value, index, array) => index === array.length - 1) as string,
+    10,
+  );
 
 describe('Bookmark service: ', () => {
   describe('fromJSONToBookmark() ', () => {
@@ -173,17 +182,8 @@ describe('Bookmark service: ', () => {
       const mockFetch = injectJsonSuccessResponseToFetch({
         bookmark: mockBookmarkJson,
       });
-      it(`SHOULD eventually resolve to a bookmark with tag list`, () => {
-        const getIdFromEndpoint = (endpoint: string) =>
-          parseInt(
-            endpoint
-              .split('/')
-              .find(
-                (value, index, array) => index === array.length - 1,
-              ) as string,
-            10,
-          );
-        return testedModule
+      it(`SHOULD eventually resolve to a bookmark with tag list`, () =>
+        testedModule
           .getBookmarkDetailsWithTagList(mockFetch)('foo')(5678)
           .then((bookmark: IBookmarkWithTagList) =>
             bookmark.tagList.map((tag, index) =>
@@ -191,8 +191,7 @@ describe('Bookmark service: ', () => {
                 getIdFromEndpoint(mockBookmarkJson.tags[index]),
               ),
             ),
-          );
-      });
+          ));
     });
   });
   describe('removeTagFromBookmarkById(): ', () => {
@@ -352,6 +351,58 @@ describe('Bookmark service: ', () => {
           ],
         });
       });
+    });
+  });
+  describe('updateBookmark(): ', () => {
+    describe('GIVEN an invalid bookmark id: ', () => {
+      it('SHOULD eventually reject the promise: ', done => {
+        return testedModule
+          .updateBookmark(FETCH_STUB_404)('foo')(1234)(['bar'])
+          .catch(() => done());
+      });
+    });
+    describe(`GIVEN a valid bookmark id
+    AND an empty tag name list`, () => {
+      const mockResponse: IBookmarkResponse = {
+        bookmark: {
+          ...MOCK_BOOKMARK_JSON,
+          tags: [],
+        },
+      };
+      it('SHOULD resolve to a bookmark with given id and an empty tag list', () =>
+        testedModule
+          .updateBookmark(injectJsonSuccessResponseToFetch(mockResponse))(
+            'foo',
+          )(1234)([])
+          .then(bookmark =>
+            expect(bookmark).toEqual({
+              ...testedModule.fromJSONToBookmark(mockResponse.bookmark),
+              tagList: [],
+            }),
+          ));
+    });
+    describe(`GIVEN a valid bookmark id
+    AND a tag name list`, () => {
+      const tagNameList = ['foo', 'bar'];
+      const mockBookmarkJson = {
+        ...MOCK_BOOKMARK_JSON,
+        tags: ['/v1/tags/1', '/v1/tags/2'],
+      };
+      const mockResponse: IBookmarkResponse = {
+        bookmark: mockBookmarkJson,
+      };
+      it('SHOULD resolve to a bookmark with given id and an empty tag list', () =>
+        testedModule
+          .updateBookmark(injectJsonSuccessResponseToFetch(mockResponse))(
+            'foo',
+          )(1234)(tagNameList)
+          .then((bookmark: IBookmarkWithTagList) =>
+            bookmark.tagList.map((tag, index) =>
+              expect(tag.id).toBe(
+                getIdFromEndpoint(mockBookmarkJson.tags[index]),
+              ),
+            ),
+          ));
     });
   });
 });

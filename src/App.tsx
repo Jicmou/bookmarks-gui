@@ -6,7 +6,10 @@ import Modal from '@material-ui/core/Modal';
 import { Main } from './main';
 import { BookmarkPage } from './bookmark-page/bookmark-page';
 import { IServerErrorMessage } from './services/bookmark.service.type';
-import { TBookmarkList } from './bookmark-table/bookmark.type';
+import {
+  TBookmarkList,
+  IBookmarkWithTagList,
+} from './bookmark-table/bookmark.type';
 
 import * as types from './App.type';
 import { INITIAL_STATE } from './App.init';
@@ -55,6 +58,7 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
                 component={() => (
                   <BookmarkPage
                     bookmark={this.state.currentBookmark}
+                    onBookmarkSave={this.handleBookmarkSave()}
                     onFormSubmit={this.handleTagFormSubmit()}
                     onTagRemove={this.handleTagRemove()}
                   />
@@ -94,6 +98,14 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
         rowsPerPage: args.rowsPerPage,
       },
     });
+  }
+
+  private handleBookmarkSave() {
+    return () => {
+      if (this.state.currentBookmark) {
+        this.updateBookmark(this.state.currentBookmark);
+      }
+    };
   }
 
   private handleChangePage() {
@@ -241,6 +253,16 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
         )(tagId),
       });
     }
+  }
+
+  private updateBookmark(bookmark: IBookmarkWithTagList) {
+    return this.props.bookmarkService
+      .updateBookmark(this.props.fetch)(this.state.apiUrl)(bookmark.id)(
+        bookmark.tagList.map(tag => tag.name),
+      )
+      .then(updatedBookmark =>
+        this.setState({ currentBookmark: updatedBookmark }),
+      );
   }
 }
 
