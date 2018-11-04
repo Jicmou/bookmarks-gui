@@ -36,6 +36,7 @@ export interface IAppState {
   currentBookmark: IBookmarkWithTagList | undefined;
   modal: IModalState;
   table: ITableState;
+  title: string;
 }
 
 export interface ITargetValueEvent {
