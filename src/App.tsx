@@ -74,6 +74,11 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
         this.setState({
           bookmarkList: [...this.state.bookmarkList, bookmark],
         });
+        this.updateTableContent({
+          bookmarkList: this.state.bookmarkList,
+          currentPage: this.state.table.currentPage,
+          rowsPerPage: this.state.table.rowsPerPage,
+        });
       })
       .catch((errorMessage: IServerErrorMessage) => {
         this.displayModal(errorMessage.message);
@@ -88,6 +93,11 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
           bookmarkList: this.props.bookmarkService.removeBookmarkFromList(
             this.state.bookmarkList,
           )(bookmarkId),
+        });
+        this.updateTableContent({
+          bookmarkList: this.state.bookmarkList,
+          currentPage: this.state.table.currentPage,
+          rowsPerPage: this.state.table.rowsPerPage,
         });
       });
   }
