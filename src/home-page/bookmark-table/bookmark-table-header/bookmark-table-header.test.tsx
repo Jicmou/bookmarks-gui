@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { MOCK_COLUMN_LIST } from '../../testing/column.mock';
+import { MOCK_COLUMN_LIST } from '../../../testing/column.mock';
 
 import {
   BookmarkTableHeader,

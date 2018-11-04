@@ -6,7 +6,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Create from '@material-ui/icons/Create';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
-import { IBookmark } from '../../types/bookmark.type';
+import { IBookmark } from '../../../../types/bookmark.type';
 
 export interface IBookmarkTableRowProps {
   bookmark: IBookmark;

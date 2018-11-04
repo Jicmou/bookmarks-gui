@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import TableBody from '@material-ui/core/TableBody';
 
-import { BookmarkTableRow } from './bookmark-table-row';
-import { TBookmarkList } from '../../types/bookmark.type';
+import { BookmarkTableRow } from './bookmark-table-row/bookmark-table-row';
+import { TBookmarkList } from '../../../types/bookmark.type';
 
 export interface IBookmarkTableBodyProps {
   bookmarkList: TBookmarkList;

@@ -4,7 +4,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 
-import { ColumnList } from './columnList';
+import { ColumnList } from '../columnList';
 
 export interface IBookmarkTableHeaderProps {
   columnList: ColumnList;

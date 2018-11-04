@@ -5,8 +5,8 @@ import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TablePagination from '@material-ui/core/TablePagination';
 
-import { BookmarkTableHeader } from './bookmark-table-header';
-import { BookmarkTableBody } from './bookmark-table-body';
+import { BookmarkTableHeader } from './bookmark-table-header/bookmark-table-header';
+import { BookmarkTableBody } from './bookmark-table-body/bookmark-table-body';
 
 import { ITargetValueEvent, ITableState } from '../../App.type';
 
