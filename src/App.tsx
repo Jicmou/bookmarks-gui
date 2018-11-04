@@ -58,22 +58,58 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
     );
   }
 
-  private updateTableContent(args: {
-    currentPage: number;
-    rowsPerPage: types.ERowsPerPAge;
-    bookmarkList: TBookmarkList;
-  }) {
+  private closeModal() {
     this.setState({
-      table: {
-        ...this.state.table,
-        currentPage: args.currentPage,
-        paginatedBookmarkList: args.bookmarkList.slice(
-          args.currentPage * args.rowsPerPage,
-          args.currentPage * args.rowsPerPage + args.rowsPerPage,
-        ),
-        rowsPerPage: args.rowsPerPage,
+      modal: {
+        message: '',
+        open: false,
       },
     });
+  }
+
+  private createBookmark(event: Event) {
+    return (link: string) =>
+      this.props.bookmarkService
+        .createBookmark(this.props.fetch)(this.state.apiUrl)(link)
+        .then(bookmark => {
+          this.setState({
+            bookmarkList: [...this.state.bookmarkList, bookmark],
+          });
+        })
+        .catch((errorMessage: IServerErrorMessage) => {
+          this.displayModal(errorMessage.message);
+        });
+  }
+
+  private deleteBookmark(bookmarkId: number) {
+    return this.props.bookmarkService
+      .deleteBookmark(this.props.fetch)(this.state.apiUrl)(bookmarkId)
+      .then(() => {
+        this.setState({
+          bookmarkList: this.props.bookmarkService.removeBookmarkFromList(
+            this.state.bookmarkList,
+          )(bookmarkId),
+        });
+      });
+  }
+
+  private displayModal(message: string) {
+    this.setState({
+      modal: {
+        message,
+        open: true,
+      },
+    });
+  }
+
+  private editBookmark(bookmarkId: number) {
+    return this.props.bookmarkService
+      .getBookmarkDetailsWithTagList(this.props.fetch)(this.state.apiUrl)(
+        bookmarkId,
+      )
+      .then(bookmarkDetails =>
+        this.setState({ currentBookmark: bookmarkDetails }),
+      );
   }
 
   private handleBookmarkSave() {
@@ -124,6 +160,12 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
     };
   }
 
+  private handleModalClose() {
+    return () => {
+      this.closeModal();
+    };
+  }
+
   private handleTagFormSubmit() {
     return (tag: string) => (event: Event) => {
       event.preventDefault();
@@ -143,64 +185,14 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
     };
   }
 
-  private handleModalClose() {
-    return () => {
-      this.closeModal();
-    };
-  }
-
-  private closeModal() {
-    this.setState({
-      modal: {
-        message: '',
-        open: false,
-      },
-    });
-  }
-
-  private displayModal(message: string) {
-    this.setState({
-      modal: {
-        message,
-        open: true,
-      },
-    });
-  }
-
-  private createBookmark(event: Event) {
-    return (link: string) =>
-      this.props.bookmarkService
-        .createBookmark(this.props.fetch)(this.state.apiUrl)(link)
-        .then(bookmark => {
-          this.setState({
-            bookmarkList: [...this.state.bookmarkList, bookmark],
-          });
-        })
-        .catch((errorMessage: IServerErrorMessage) => {
-          this.displayModal(errorMessage.message);
-        });
-  }
-
-  private deleteBookmark(bookmarkId: number) {
-    return this.props.bookmarkService
-      .deleteBookmark(this.props.fetch)(this.state.apiUrl)(bookmarkId)
-      .then(() => {
-        this.setState({
-          bookmarkList: this.props.bookmarkService.removeBookmarkFromList(
-            this.state.bookmarkList,
-          )(bookmarkId),
-        });
+  private removeTagFromBookmarkById(tagId: number) {
+    if (this.state.currentBookmark) {
+      this.setState({
+        currentBookmark: this.props.bookmarkService.removeTagFromBookmarkById(
+          this.state.currentBookmark,
+        )(tagId),
       });
-  }
-
-  private editBookmark(bookmarkId: number) {
-    return this.props.bookmarkService
-      .getBookmarkDetailsWithTagList(this.props.fetch)(this.state.apiUrl)(
-        bookmarkId,
-      )
-      .then(bookmarkDetails =>
-        this.setState({ currentBookmark: bookmarkDetails }),
-      );
+    }
   }
 
   private retrieveBookmarkList() {
@@ -222,16 +214,6 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
       });
   }
 
-  private removeTagFromBookmarkById(tagId: number) {
-    if (this.state.currentBookmark) {
-      this.setState({
-        currentBookmark: this.props.bookmarkService.removeTagFromBookmarkById(
-          this.state.currentBookmark,
-        )(tagId),
-      });
-    }
-  }
-
   private updateBookmark(bookmark: IBookmarkWithTagList) {
     return this.props.bookmarkService
       .updateBookmark(this.props.fetch)(this.state.apiUrl)(bookmark.id)(
@@ -241,6 +223,24 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
         this.setState({ currentBookmark: updatedBookmark });
         this.displayModal(`${updatedBookmark.title} succesfully updated`);
       });
+  }
+
+  private updateTableContent(args: {
+    currentPage: number;
+    rowsPerPage: types.ERowsPerPAge;
+    bookmarkList: TBookmarkList;
+  }) {
+    this.setState({
+      table: {
+        ...this.state.table,
+        currentPage: args.currentPage,
+        paginatedBookmarkList: args.bookmarkList.slice(
+          args.currentPage * args.rowsPerPage,
+          args.currentPage * args.rowsPerPage + args.rowsPerPage,
+        ),
+        rowsPerPage: args.rowsPerPage,
+      },
+    });
   }
 }
 
