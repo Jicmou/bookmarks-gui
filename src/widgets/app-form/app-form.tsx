@@ -28,7 +28,7 @@ export class AppForm extends React.Component<IAppFormProps, IAppFormState> {
       <form
         className="app-form"
         id={this.props.formId}
-        onSubmit={this.props.onAppFormSubmit(this.state.inputValue)}
+        onSubmit={this.handleFormSubmit()}
       >
         <TextField
           className="app-form-input"
@@ -49,6 +49,15 @@ export class AppForm extends React.Component<IAppFormProps, IAppFormState> {
         </Button>
       </form>
     );
+  }
+
+  private handleFormSubmit() {
+    return (event: IPreventEvent) => {
+      this.props.onAppFormSubmit(this.state.inputValue)(event);
+      this.setState({
+        inputValue: '',
+      });
+    };
   }
 
   private handleInputChange() {
