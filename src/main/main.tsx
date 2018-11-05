@@ -5,7 +5,7 @@ import { ERoutePath } from '../types/route-path.enum';
 
 import { HomePage, HomePageProps } from './home-page/home-page';
 import {
-  BookmarkPage,
+  RoutedBookmarkPage,
   IBookmarkPageProps,
 } from './bookmark-page/bookmark-page';
 
@@ -24,7 +24,6 @@ export const Main = (props: MainProps) => (
               onChangePage={props.onChangePage}
               onChangeRowsPerPage={props.onChangeRowsPerPage}
               onDelete={props.onDelete}
-              onEdit={props.onEdit}
               table={props.table}
             />
           )}
@@ -32,11 +31,11 @@ export const Main = (props: MainProps) => (
         <Route
           path={ERoutePath.BOOKMARK_PAGE}
           component={() => (
-            <BookmarkPage
-              bookmark={props.bookmark}
+            <RoutedBookmarkPage
+              addTagToBookmarkTagList={props.addTagToBookmarkTagList}
               onBookmarkSave={props.onBookmarkSave}
-              onTagFormSubmit={props.onTagFormSubmit}
-              onTagRemove={props.onTagRemove}
+              removeTagFromBookmarkById={props.removeTagFromBookmarkById}
+              retrieveCurrentBookmark={props.retrieveCurrentBookmark}
             />
           )}
         />

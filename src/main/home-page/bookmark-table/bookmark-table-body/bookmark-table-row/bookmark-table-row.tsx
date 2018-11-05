@@ -11,7 +11,6 @@ import { IBookmark } from '../../../../../types/bookmark.type';
 export interface IBookmarkTableRowProps {
   bookmark: IBookmark;
   onDelete: (bookmarkId: number) => () => void;
-  onEdit: (bookmarkId: number) => () => void;
 }
 
 export const BookmarkTableRow = (props: IBookmarkTableRowProps) => (
@@ -25,7 +24,6 @@ export const BookmarkTableRow = (props: IBookmarkTableRowProps) => (
         <Create
           className="clickable"
           id={`edit-bookmark-${props.bookmark.id}`}
-          onClick={props.onEdit(props.bookmark.id)}
         />
       </Link>
     </TableCell>

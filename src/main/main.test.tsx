@@ -12,15 +12,16 @@ const mockCurriedHandler = () => MOCK_HANDLER;
 const renderMain = (container: HTMLElement) => {
   ReactDOM.render(
     <Main
-      bookmark={MOCK_BOOKMARK_WITH_TAG_LIST}
+      addTagToBookmarkTagList={() => () => MOCK_BOOKMARK_WITH_TAG_LIST}
+      onBookmarkFormSubmit={() => MOCK_HANDLER}
       onBookmarkSave={MOCK_HANDLER}
       onChangePage={MOCK_HANDLER}
       onChangeRowsPerPage={MOCK_HANDLER}
       onDelete={mockCurriedHandler}
-      onEdit={mockCurriedHandler}
-      onBookmarkFormSubmit={() => MOCK_HANDLER}
-      onTagFormSubmit={() => MOCK_HANDLER}
-      onTagRemove={() => MOCK_HANDLER}
+      removeTagFromBookmarkById={() => () => MOCK_BOOKMARK_WITH_TAG_LIST}
+      retrieveCurrentBookmark={() =>
+        Promise.resolve(MOCK_BOOKMARK_WITH_TAG_LIST)
+      }
       table={MOCK_TABLE}
     />,
     container,

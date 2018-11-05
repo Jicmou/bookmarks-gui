@@ -13,7 +13,6 @@ const renderBookmarkList = (container: HTMLElement) => (
     <BookmarkTable
       onChangePage={props.onChangePage}
       onChangeRowsPerPage={props.onChangeRowsPerPage}
-      onEdit={props.onEdit}
       onDelete={props.onDelete}
       table={props.table}
     />,
@@ -27,7 +26,6 @@ it('renders without crashing', () => {
     onChangePage: MOCK_HANDLER,
     onChangeRowsPerPage: MOCK_HANDLER,
     onDelete: () => MOCK_HANDLER,
-    onEdit: () => MOCK_HANDLER,
     table: MOCK_TABLE,
   });
 });
