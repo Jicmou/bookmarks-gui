@@ -16,7 +16,11 @@ export interface IBookmarkTableRowProps {
 export const BookmarkTableRow = (props: IBookmarkTableRowProps) => (
   <TableRow>
     <TableCell>{props.bookmark.title}</TableCell>
-    <TableCell>{props.bookmark.url}</TableCell>
+    <TableCell>
+      <a href={props.bookmark.url} target="blank">
+        {props.bookmark.url}
+      </a>
+    </TableCell>
     <TableCell>{props.bookmark.authorName}</TableCell>
     <TableCell>{props.bookmark.creationDate.toString()}</TableCell>
     <TableCell>
