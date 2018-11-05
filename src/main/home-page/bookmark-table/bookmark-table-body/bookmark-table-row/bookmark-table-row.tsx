@@ -22,7 +22,7 @@ export const BookmarkTableRow = (props: IBookmarkTableRowProps) => (
       </a>
     </TableCell>
     <TableCell>{props.bookmark.authorName}</TableCell>
-    <TableCell>{props.bookmark.creationDate.toString()}</TableCell>
+    <TableCell>{props.bookmark.creationDate.toLocaleDateString()}</TableCell>
     <TableCell>
       <Link to={`/bookmark/${props.bookmark.id}`}>
         <Create
