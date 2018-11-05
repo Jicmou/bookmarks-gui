@@ -31,7 +31,7 @@ export const BookmarkDetails = (props: IBookmarkDetailsProps) => (
     <li className="bookmark-details-item">
       <span className="bookmark-details-item-label">added date:</span>
       <span className="bookmark-details-item-value">
-        {props.bookmark.creationDate.toString()}
+        {props.bookmark.creationDate.toLocaleDateString()}
       </span>
     </li>
     <li className="bookmark-details-item">
