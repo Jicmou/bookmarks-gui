@@ -193,6 +193,7 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
     this.setState({
       table: {
         ...this.state.table,
+        bookmarkListLength: args.bookmarkList.length,
         currentPage: args.currentPage,
         paginatedBookmarkList: args.bookmarkList.slice(
           args.currentPage * args.rowsPerPage,

@@ -20,11 +20,11 @@ export enum ERowsPerPAge {
 }
 
 export interface ITableState {
+  bookmarkListLength: number;
   columnList: ColumnList;
   currentPage: number;
   paginatedBookmarkList: TBookmarkList;
   rowsPerPage: ERowsPerPAge;
-  bookmarkListLength: number;
 }
 
 export interface IAppState {
