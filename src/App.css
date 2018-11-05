@@ -1,5 +1,4 @@
 .App {
-  /* text-align: center; */
   position: relative;
   display: flex;
   flex-direction: column;
@@ -30,10 +29,13 @@
   line-height: 1.7em;
 }
 
-.main-body {
+.main {
   position: relative;
   height: calc(100vh - 40px);
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -72,4 +74,20 @@ form.app-form {
 div.app-form-input {
   margin-right: 40px;
   min-width: 600px
+}
+
+a,
+a:active,
+a:hover,
+a:focus,
+a:visited {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:active {
+  transform: translateY(1px);
 }

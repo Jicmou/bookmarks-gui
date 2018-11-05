@@ -1,14 +1,11 @@
 import * as React from 'react';
 
-import { Main } from './main';
+import { Main } from './main/main';
 import { AppHeader } from './widgets/app-header/app-header';
 import { AppModal } from './widgets/app-modal/app-modal';
 
 import { IServerErrorMessage } from './services/bookmark.service.type';
-import {
-  TBookmarkList,
-  IBookmarkWithTagList,
-} from './bookmark-table/bookmark.type';
+import { TBookmarkList, IBookmarkWithTagList } from './types/bookmark.type';
 
 import * as types from './App.type';
 import { INITIAL_STATE } from './App.init';
@@ -77,6 +74,11 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
         this.setState({
           bookmarkList: [...this.state.bookmarkList, bookmark],
         });
+        this.updateTableContent({
+          bookmarkList: this.state.bookmarkList,
+          currentPage: this.state.table.currentPage,
+          rowsPerPage: this.state.table.rowsPerPage,
+        });
       })
       .catch((errorMessage: IServerErrorMessage) => {
         this.displayModal(errorMessage.message);
@@ -91,6 +93,11 @@ class App extends React.Component<types.IAppProps, types.IAppState> {
           bookmarkList: this.props.bookmarkService.removeBookmarkFromList(
             this.state.bookmarkList,
           )(bookmarkId),
+        });
+        this.updateTableContent({
+          bookmarkList: this.state.bookmarkList,
+          currentPage: this.state.table.currentPage,
+          rowsPerPage: this.state.table.rowsPerPage,
         });
       });
   }

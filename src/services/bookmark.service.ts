@@ -1,5 +1,5 @@
 import { TagList } from './../types/tag.type';
-import * as bookmarkTypes from '../bookmark-table/bookmark.type';
+import * as bookmarkTypes from '../types/bookmark.type';
 import * as types from './bookmark.service.type';
 import { Fetch, EMethod, ERedirect } from '../types/fetch.type';
 import { getTagListFromEndpointList } from './tag.service';
