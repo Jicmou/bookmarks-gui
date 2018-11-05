@@ -16,7 +16,6 @@ export const HomePage = (props: HomePageProps) => (
     <BookmarkForm onBookmarkFormSubmit={props.onBookmarkFormSubmit} />
     <BookmarkTable
       onDelete={props.onDelete}
-      onEdit={props.onEdit}
       onChangePage={props.onChangePage}
       onChangeRowsPerPage={props.onChangeRowsPerPage}
       table={props.table}

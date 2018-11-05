@@ -8,7 +8,6 @@ import { TBookmarkList } from '../../../../types/bookmark.type';
 export interface IBookmarkTableBodyProps {
   bookmarkList: TBookmarkList;
   onDelete: (bookmarkId: number) => () => void;
-  onEdit: (bookmarkId: number) => () => void;
 }
 
 export const BookmarkTableBody = (props: IBookmarkTableBodyProps) => (
@@ -18,7 +17,6 @@ export const BookmarkTableBody = (props: IBookmarkTableBodyProps) => (
         bookmark={bookmark}
         key={bookmark.id}
         onDelete={props.onDelete}
-        onEdit={props.onEdit}
       />
     ))}
   </TableBody>

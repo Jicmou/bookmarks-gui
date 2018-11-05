@@ -1,7 +1,7 @@
 import { ColumnList } from './main/home-page/bookmark-table/columnList';
 import { Fetch } from './types/fetch.type';
 import { IBookmarkService } from './services/bookmark.service.type';
-import { TBookmarkList, IBookmarkWithTagList } from './types/bookmark.type';
+import { TBookmarkList } from './types/bookmark.type';
 
 export interface IAppProps {
   fetch: Fetch;
@@ -30,7 +30,6 @@ export interface ITableState {
 export interface IAppState {
   apiUrl: string;
   bookmarkList: TBookmarkList;
-  currentBookmark: IBookmarkWithTagList | undefined;
   modal: IModalState;
   table: ITableState;
   title: string;

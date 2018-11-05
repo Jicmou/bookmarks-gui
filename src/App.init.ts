@@ -21,7 +21,6 @@ const TABLE_INIT_VALUE: types.ITableState = {
 export const INITIAL_STATE: types.IAppState = {
   apiUrl: API_URL,
   bookmarkList: [],
-  currentBookmark: undefined,
   modal: MODAL_INIT_VALUE,
   table: TABLE_INIT_VALUE,
   title: APP_TITLE,

@@ -15,7 +15,6 @@ const renderMain = (container: HTMLElement) => {
       onChangePage={MOCK_HANDLER}
       onChangeRowsPerPage={MOCK_HANDLER}
       onDelete={mockCurriedHandler}
-      onEdit={mockCurriedHandler}
       table={MOCK_TABLE}
     />,
     container,
