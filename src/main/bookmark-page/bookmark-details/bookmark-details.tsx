@@ -11,6 +11,18 @@ export interface IBookmarkDetailsProps {
 export const BookmarkDetails = (props: IBookmarkDetailsProps) => (
   <ul className="bookmark-details-list">
     <li className="bookmark-details-item">
+      <span className="bookmark-details-item-label">type:</span>
+      <span className="bookmark-details-item-value">{props.bookmark.type}</span>
+    </li>
+    <li className="bookmark-details-item">
+      <span className="bookmark-details-item-label">url:</span>
+      <span className="bookmark-details-item-value">
+        <a href={props.bookmark.url} target="blank">
+          {props.bookmark.url}
+        </a>
+      </span>
+    </li>
+    <li className="bookmark-details-item">
       <span className="bookmark-details-item-label">author name:</span>
       <span className="bookmark-details-item-value">
         {props.bookmark.authorName}
@@ -26,18 +38,6 @@ export const BookmarkDetails = (props: IBookmarkDetailsProps) => (
       <span className="bookmark-details-item-label">height:</span>
       <span className="bookmark-details-item-value">
         {props.bookmark.height}
-      </span>
-    </li>
-    <li className="bookmark-details-item">
-      <span className="bookmark-details-item-label">type:</span>
-      <span className="bookmark-details-item-value">{props.bookmark.type}</span>
-    </li>
-    <li className="bookmark-details-item">
-      <span className="bookmark-details-item-label">url:</span>
-      <span className="bookmark-details-item-value">
-        <a href={props.bookmark.url} target="blank">
-          {props.bookmark.url}
-        </a>
       </span>
     </li>
     <li className="bookmark-details-item">
